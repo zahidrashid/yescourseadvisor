@@ -48,7 +48,7 @@ def search_context(question):
 # Home route
 @app.route("/")
 def home():
-    return "AI Bot Running (Gemini NEW zahid)"
+    return "AI Bot Running (Gemini zahid)"
 
 # Chat route
 @app.route("/chat", methods=["POST"])
@@ -80,13 +80,14 @@ QUESTION:
 {question}
 """
 
-        # ✅ New Gemini call
+        # ✅ New Gemini API call
         response = client.models.generate_content(
             model="gemini-1.5-flash",
             contents=prompt
         )
 
-        reply = response.text if response.text else "I couldn't generate a response."
+        # ✅ Safe response handling
+        reply = response.text if hasattr(response, "text") and response.text else "I couldn't generate a response."
 
         return jsonify({"reply": reply})
 
@@ -94,6 +95,6 @@ QUESTION:
         print("Error:", e)
         return jsonify({"reply": "⚠️ Server error. Please try again."})
 
-# Run app
+# Run app (Render compatible)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
