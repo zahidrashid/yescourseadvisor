@@ -1,16 +1,11 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import os
 import difflib
-from google import genai
 
 app = Flask(__name__)
 CORS(app)
 
-# ✅ Google GenAI client
-client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
-
-# Load text data
+# Load data
 def load_data():
     try:
         with open("data.txt", "r", encoding="utf-8") as f:
@@ -19,14 +14,14 @@ def load_data():
         return ""
 
 DATA = load_data()
+LINES = DATA.split("\n")
 
-# Search relevant context
-def search_context(question):
-    lines = DATA.split("\n")
+# Search function
+def search_answer(question):
     words = question.lower().split()
     scored = []
 
-    for line in lines:
+    for line in LINES:
         score = 0
         line_lower = line.lower()
 
@@ -38,67 +33,35 @@ def search_context(question):
                 if match:
                     score += 1
 
-        if score > 1:
+        if score > 0:
             scored.append((score, line))
 
     scored.sort(key=lambda x: x[0], reverse=True)
 
-    return "\n".join([l for _, l in scored[:8]])
+    results = [line for _, line in scored[:5] if line.strip()]
+
+    if results:
+        return "• " + "\n• ".join(results)
+    else:
+        return "Sorry, I couldn't find that information."
 
 # Home route
 @app.route("/")
 def home():
-    return "AI Bot Running (Smart yes college 🚀)"
+    return "Bot Running (No API 🚀)"
 
 # Chat route
 @app.route("/chat", methods=["POST"])
 def chat():
-    try:
-        question = request.json.get("message", "")
+    question = request.json.get("message", "")
 
-        if not question:
-            return jsonify({"reply": "Please enter a question."})
+    if not question:
+        return jsonify({"reply": "Please enter a question."})
 
-        context = search_context(question)
+    answer = search_answer(question)
 
-        # ✅ Smart fallback (always answer)
-        if not context.strip():
-            context = DATA[:2000]
-
-        # ✅ Improved prompt
-        prompt = f"""
-You are a helpful assistant for YES International College.
-
-Answer clearly and naturally using the context.
-You can summarize or list programs if needed.
-
-If the question is about courses, list relevant programs.
-
-CONTEXT:
-{context}
-
-QUESTION:
-{question}
-"""
-
-        # ✅ Gemini API call
-        response = client.models.generate_content(
-            model="gemini-1.5-flash",
-            contents=prompt
-        )
-
-        # ✅ SAFE RESPONSE PARSING (FIXED ERROR)
-        try:
-            reply = response.candidates[0].content.parts[0].text
-        except:
-            reply = "I couldn't generate a response."
-
-        return jsonify({"reply": reply})
-
-    except Exception as e:
-        print("Error:", e)
-        return jsonify({"reply": "⚠️ Server error. Please try again."})
+    return jsonify({"reply": answer})
 
 # Run app
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
+    app.run(host="0.0.0.0", port=10000)
