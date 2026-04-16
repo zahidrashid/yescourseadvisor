@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+import pdfplumber
 from openai import OpenAI
 
 app = Flask(__name__)
@@ -8,24 +9,48 @@ CORS(app)
 
 client = OpenAI(api_key=os.environ.get("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"))
 
-# Load your data
-with open("data.txt", "r", encoding="utf-8") as f:
-    DATA = f.read()
+# 📂 Extract text from all PDFs
+def load_pdfs():
+    text = ""
+    folder = "pdfs"
+    
+    for file in os.listdir(folder):
+        if file.endswith(".pdf"):
+            with pdfplumber.open(os.path.join(folder, file)) as pdf:
+                for page in pdf.pages:
+                    text += page.extract_text() + "\n"
+    
+    return text
+
+DATA = load_pdfs()
+
+# 🔍 Simple smart search (chunk matching)
+def search_context(question):
+    chunks = DATA.split("\n")
+    
+    relevant = []
+    for chunk in chunks:
+        if any(word in chunk.lower() for word in question.lower().split()):
+            relevant.append(chunk)
+    
+    return "\n".join(relevant[:10])  # limit
 
 @app.route("/")
 def home():
-    return "AI College Bot Running"
+    return "AI PDF Bot Running"
 
 @app.route("/chat", methods=["POST"])
 def chat():
     question = request.json["message"]
 
+    context = search_context(question)
+
     prompt = f"""
     You are a college assistant.
-    Answer only using the data below.
+    Answer only using the context below.
 
-    DATA:
-    {DATA}
+    CONTEXT:
+    {context}
 
     Question: {question}
     """
