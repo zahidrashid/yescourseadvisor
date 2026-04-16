@@ -83,11 +83,15 @@ QUESTION:
 
         # ✅ Gemini API call
         response = client.models.generate_content(
-            model="gemini-1.5-flash",
-            contents=prompt
-        )
+    model="gemini-1.5-flash",
+    contents=prompt
+)
 
-        reply = response.text if hasattr(response, "text") and response.text else "I couldn't generate a response."
+# ✅ Extract text safely
+try:
+    reply = response.candidates[0].content.parts[0].text
+except:
+    reply = "I couldn't generate a response."
 
         return jsonify({"reply": reply})
 
