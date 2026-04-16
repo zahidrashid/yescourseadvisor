@@ -2,16 +2,13 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import difflib
-import google.generativeai as genai
+from google import genai
 
 app = Flask(__name__)
 CORS(app)
 
-# Configure Gemini API
-genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
-
-# ✅ Use stable model
-model = genai.GenerativeModel("gemini-1.5-flash")
+# ✅ New Google GenAI client
+client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
 
 # Load text data
 def load_data():
@@ -51,7 +48,7 @@ def search_context(question):
 # Home route
 @app.route("/")
 def home():
-    return "AI Bot Running (Gemini 🚀)"
+    return "AI Bot Running (Gemini NEW zahid)"
 
 # Chat route
 @app.route("/chat", methods=["POST"])
@@ -71,7 +68,7 @@ def chat():
 You are a helpful college assistant.
 
 Answer ONLY using the context below.
-If the answer is not found, say:
+If not found, say:
 "I couldn't find that information."
 
 Keep the answer clear and short.
@@ -83,10 +80,13 @@ QUESTION:
 {question}
 """
 
-        response = model.generate_content(prompt)
+        # ✅ New Gemini call
+        response = client.models.generate_content(
+            model="gemini-1.5-flash",
+            contents=prompt
+        )
 
-        # ✅ Safe response handling
-        reply = response.text if hasattr(response, "text") and response.text else "I couldn't generate a response."
+        reply = response.text if response.text else "I couldn't generate a response."
 
         return jsonify({"reply": reply})
 
@@ -94,6 +94,6 @@ QUESTION:
         print("Error:", e)
         return jsonify({"reply": "⚠️ Server error. Please try again."})
 
-# Run app (Render compatible)
+# Run app
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
