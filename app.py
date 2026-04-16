@@ -6,7 +6,7 @@ from openai import OpenAI
 app = Flask(__name__)
 CORS(app)
 
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+client = OpenAI(api_key=os.environ.get("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"))
 
 # Load your data
 with open("data.txt", "r", encoding="utf-8") as f:
