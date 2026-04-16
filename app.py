@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 CORS(app)
 
-# ✅ Load data
+# Load data
 def load_data():
     try:
         with open("data.txt", "r", encoding="utf-8") as f:
@@ -15,7 +15,7 @@ def load_data():
 
 DATA = load_data()
 
-# ✅ Smart search function
+# Simple smart search
 def search_answer(question):
     question = question.lower()
     lines = DATA.split("\n")
@@ -39,7 +39,6 @@ def home():
 def chat():
     question = request.json.get("message", "")
     answer = search_answer(question)
-
     return jsonify({"reply": answer})
 
 if __name__ == "__main__":
