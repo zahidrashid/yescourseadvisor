@@ -9,7 +9,9 @@ CORS(app)
 
 # Configure Gemini API
 genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
-model = genai.GenerativeModel("gemini-pro")
+
+# ✅ Use stable model
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 # Load text data
 def load_data():
@@ -82,13 +84,16 @@ QUESTION:
 """
 
         response = model.generate_content(prompt)
-        reply = response.text
+
+        # ✅ Safe response handling
+        reply = response.text if hasattr(response, "text") and response.text else "I couldn't generate a response."
 
         return jsonify({"reply": reply})
 
     except Exception as e:
-        return jsonify({"reply": f"Error: {str(e)}"})
+        print("Error:", e)
+        return jsonify({"reply": "⚠️ Server error. Please try again."})
 
-# Run app
+# Run app (Render compatible)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
