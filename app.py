@@ -17,12 +17,17 @@ def load_data():
 DATA = load_data()
 LINES = DATA.split("\n")
 
-# Keywords for filtering
-COURSE_KEYWORDS = ["diploma", "certificate", "bsc", "ba", "acca", "program"]
-LOCATION_KEYWORDS = ["located", "level", "block", "kuala lumpur"]
+COURSE_KEYWORDS = ["diploma", "certificate", "bsc", "ba", "acca", "design", "program"]
 
-# Smarter search with filter
-def search_answer(question, filter_type=None):
+# Clean line (remove junk text)
+def clean_line(line):
+    line = line.strip()
+    line = line.replace("art & design:", "")
+    line = line.replace("programs:", "")
+    return line
+
+# Smart filtered search
+def search_courses(question):
     words = question.lower().split()
     scored = []
 
@@ -38,53 +43,42 @@ def search_answer(question, filter_type=None):
                     score += 1
 
         if score > 0:
-            # Apply filter
-            if filter_type == "courses":
-                if not any(k in line for k in COURSE_KEYWORDS):
-                    continue
+            if not any(k in line for k in COURSE_KEYWORDS):
+                continue
 
-            if filter_type == "location":
-                if not any(k in line for k in LOCATION_KEYWORDS):
-                    continue
+            # remove unwanted lines
+            if "located" in line or "level" in line or "block" in line:
+                continue
 
-            scored.append((score, line))
+            scored.append((score, clean_line(line)))
 
     scored.sort(reverse=True)
-    results = [line for score, line in scored[:8]]
+
+    results = []
+    seen = set()
+
+    for score, line in scored:
+        if line and line not in seen:
+            results.append(line)
+            seen.add(line)
 
     if results:
-        return "\n".join(results)
+        return "• " + "\n• ".join(results[:8])
 
-    return "Sorry, I couldn't find that information."
-
-# Intent detection
-def intent_reply(question):
-    q = question.lower()
-
-    if "course" in q or "program" in q:
-        return search_answer(q, "courses")
-
-    if "location" in q or "where" in q:
-        return search_answer(q, "location")
-
-    return None
+    return "Sorry, no courses found."
 
 @app.route("/")
 def home():
-    return "Smart Filtered Bot Running"
+    return "Clean Smart Bot Running"
 
 @app.route("/chat", methods=["POST"])
 def chat():
-    question = request.json.get("message", "")
+    question = request.json.get("message", "").lower()
 
-    # Intent-based filtered response
-    intent = intent_reply(question)
-    if intent:
-        return jsonify({"reply": intent})
+    if "course" in question or "program" in question or "design" in question:
+        return jsonify({"reply": search_courses(question)})
 
-    # fallback
-    answer = search_answer(question)
-    return jsonify({"reply": answer})
+    return jsonify({"reply": "Please ask about courses or programs."})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
