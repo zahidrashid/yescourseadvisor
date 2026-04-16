@@ -1,37 +1,43 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+from openai import OpenAI
 
 app = Flask(__name__)
-
-# ✅ Enable CORS (fixes your error)
 CORS(app)
 
-# Load data
-with open("data.txt", "r", encoding="utf-8") as f:
-    DATA = f.read().lower()
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-# Home route (for testing)
+# Load your data
+with open("data.txt", "r", encoding="utf-8") as f:
+    DATA = f.read()
+
 @app.route("/")
 def home():
-    return "College Bot is running!"
+    return "AI College Bot Running"
 
-# Chat route
 @app.route("/chat", methods=["POST"])
 def chat():
-    question = request.json["message"].lower()
+    question = request.json["message"]
 
-    if "bca" in question and "fee" in question:
-        return jsonify({"reply": "BCA fee is 50000 per year"})
-    
-    if "bba" in question and "fee" in question:
-        return jsonify({"reply": "BBA fee is 40000 per year"})
-    
-    if "faculty" in question:
-        return jsonify({"reply": "Computer Science HOD is Mr. XYZ"})
-    
-    return jsonify({"reply": "Sorry, I couldn't find that info."})
+    prompt = f"""
+    You are a college assistant.
+    Answer only using the data below.
 
-# Run app (important for Render)
+    DATA:
+    {DATA}
+
+    Question: {question}
+    """
+
+    response = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[{"role": "user", "content": prompt}]
+    )
+
+    reply = response.choices[0].message.content
+
+    return jsonify({"reply": reply})
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
