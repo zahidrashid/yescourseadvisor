@@ -48,7 +48,7 @@ def search_context(question):
 # Home route
 @app.route("/")
 def home():
-    return "AI Bot Running (Smart Yes)"
+    return "AI Bot Running (Smart yes college 🚀)"
 
 # Chat route
 @app.route("/chat", methods=["POST"])
@@ -61,7 +61,7 @@ def chat():
 
         context = search_context(question)
 
-        # ✅ Smart fallback (VERY IMPORTANT)
+        # ✅ Smart fallback (always answer)
         if not context.strip():
             context = DATA[:2000]
 
@@ -83,15 +83,15 @@ QUESTION:
 
         # ✅ Gemini API call
         response = client.models.generate_content(
-    model="gemini-1.5-flash",
-    contents=prompt
-)
+            model="gemini-1.5-flash",
+            contents=prompt
+        )
 
-# ✅ Extract text safely
-try:
-    reply = response.candidates[0].content.parts[0].text
-except:
-    reply = "I couldn't generate a response."
+        # ✅ SAFE RESPONSE PARSING (FIXED ERROR)
+        try:
+            reply = response.candidates[0].content.parts[0].text
+        except:
+            reply = "I couldn't generate a response."
 
         return jsonify({"reply": reply})
 
