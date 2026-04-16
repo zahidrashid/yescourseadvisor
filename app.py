@@ -9,7 +9,7 @@ CORS(app)
 # ✅ OpenAI client
 client = OpenAI(api_key=os.environ.get("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"))
 
-# ✅ Load TXT data
+# ✅ Load TXT data safely
 def load_data():
     try:
         with open("data.txt", "r", encoding="utf-8") as f:
@@ -19,7 +19,7 @@ def load_data():
 
 DATA = load_data()
 
-# ✅ Smart context search
+# ✅ Smart context search (basic filtering)
 def search_context(question):
     chunks = DATA.split("\n")
     relevant = []
@@ -28,16 +28,17 @@ def search_context(question):
         if any(word in chunk.lower() for word in question.lower().split()):
             relevant.append(chunk)
 
-    return "\n".join(relevant[:10])  # limit
+    return "\n".join(relevant[:15])  # slightly more context
 
 @app.route("/")
 def home():
     return "AI TXT Bot Running"
 
+# ✅ Chat endpoint (AI powered)
 @app.route("/chat", methods=["POST"])
 def chat():
     try:
-        question = request.json.get("message", "")
+        question = request.json.get("message", "").strip()
 
         if not question:
             return jsonify({"reply": "Please ask a question."})
@@ -45,15 +46,20 @@ def chat():
         context = search_context(question)
 
         prompt = f"""
-        You are a helpful college assistant.
-        Answer ONLY using the context below.
-        If answer is not found, say "Information not available".
+You are a professional assistant for YES International College.
 
-        CONTEXT:
-        {context}
+Instructions:
+- Answer clearly and professionally
+- Use bullet points where helpful
+- Only use the provided context
+- If answer is not found, say "Information not available"
 
-        Question: {question}
-        """
+CONTEXT:
+{context}
+
+QUESTION:
+{question}
+"""
 
         response = client.chat.completions.create(
             model="gpt-4o-mini",
@@ -68,5 +74,6 @@ def chat():
         print("ERROR:", str(e))
         return jsonify({"reply": f"Server Error: {str(e)}"})
 
+# ✅ Required for Render
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
