@@ -7,6 +7,7 @@ import difflib
 app = Flask(__name__)
 CORS(app)
 
+# OpenAI client
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 # Load text data
@@ -19,7 +20,7 @@ def load_data():
 
 DATA = load_data()
 
-# Search context
+# Search relevant context
 def search_context(question):
     lines = DATA.split("\n")
     words = question.lower().split()
@@ -40,47 +41,57 @@ def search_context(question):
         if score > 1:
             scored.append((score, line))
 
-    scored.sort(reverse=True)
+    scored.sort(key=lambda x: x[0], reverse=True)
 
     return "\n".join([l for _, l in scored[:8]])
 
+# Home route
 @app.route("/")
 def home():
-    return "AI Bot Running (No PDFs)"
+    return "AI Bot Running 🚀"
 
+# Chat route
 @app.route("/chat", methods=["POST"])
 def chat():
-    question = request.json["message"]
+    try:
+        question = request.json.get("message", "")
 
-    context = search_context(question)
+        if not question:
+            return jsonify({"reply": "Please enter a question."})
 
-    if not context.strip():
-        return jsonify({"reply": "I couldn't find that information."})
+        context = search_context(question)
 
-    prompt = f"""
-    You are a helpful college assistant.
+        if not context.strip():
+            return jsonify({"reply": "I couldn't find that information."})
 
-    Answer ONLY using the context below.
-    If not found, say you don't know.
+        prompt = f"""
+You are a helpful college assistant.
 
-    CONTEXT:
-    {context}
+Answer ONLY using the context below.
+If the answer is not found, say:
+"I couldn't find that information."
 
-    QUESTION:
-    {question}
-    """
+Keep the answer clear and short.
 
-    response = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[{"role": "user", "content": prompt}]
-    )
+CONTEXT:
+{context}
 
-    reply = response.choices[0].message.content
+QUESTION:
+{question}
+"""
 
-    return jsonify({"reply": reply})
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[{"role": "user", "content": prompt}]
+        )
 
-if __name__ == "__main__":
-    app.run()    return jsonify({"reply": reply})
+        reply = response.choices[0].message.content
 
+        return jsonify({"reply": reply})
+
+    except Exception as e:
+        return jsonify({"reply": f"Error: {str(e)}"})
+
+# Run app (for Render)
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
