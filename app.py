@@ -7,7 +7,7 @@ from google import genai
 app = Flask(__name__)
 CORS(app)
 
-# ✅ New Google GenAI client
+# ✅ Google GenAI client
 client = genai.Client(api_key=os.environ.get("GOOGLE_API_KEY"))
 
 # Load text data
@@ -48,7 +48,7 @@ def search_context(question):
 # Home route
 @app.route("/")
 def home():
-    return "AI Bot Running (Gemini zahid)"
+    return "AI Bot Running (Smart Yes)"
 
 # Chat route
 @app.route("/chat", methods=["POST"])
@@ -61,17 +61,18 @@ def chat():
 
         context = search_context(question)
 
+        # ✅ Smart fallback (VERY IMPORTANT)
         if not context.strip():
-            return jsonify({"reply": "I couldn't find that information."})
+            context = DATA[:2000]
 
+        # ✅ Improved prompt
         prompt = f"""
-You are a helpful college assistant.
+You are a helpful assistant for YES International College.
 
-Answer ONLY using the context below.
-If not found, say:
-"I couldn't find that information."
+Answer clearly and naturally using the context.
+You can summarize or list programs if needed.
 
-Keep the answer clear and short.
+If the question is about courses, list relevant programs.
 
 CONTEXT:
 {context}
@@ -80,13 +81,12 @@ QUESTION:
 {question}
 """
 
-        # ✅ New Gemini API call
+        # ✅ Gemini API call
         response = client.models.generate_content(
             model="gemini-1.5-flash",
             contents=prompt
         )
 
-        # ✅ Safe response handling
         reply = response.text if hasattr(response, "text") and response.text else "I couldn't generate a response."
 
         return jsonify({"reply": reply})
@@ -95,6 +95,6 @@ QUESTION:
         print("Error:", e)
         return jsonify({"reply": "⚠️ Server error. Please try again."})
 
-# Run app (Render compatible)
+# Run app
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
