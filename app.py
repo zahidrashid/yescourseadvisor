@@ -1,4 +1,5 @@
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
 
@@ -6,11 +7,14 @@ app = Flask(__name__)
 with open("data.txt", "r", encoding="utf-8") as f:
     DATA = f.read().lower()
 
+@app.route("/")
+def home():
+    return "College Bot is running!"
+
 @app.route("/chat", methods=["POST"])
 def chat():
     question = request.json["message"].lower()
 
-    # Simple keyword matching
     if "bca" in question and "fee" in question:
         return jsonify({"reply": "BCA fee is 50000 per year"})
     
@@ -23,4 +27,4 @@ def chat():
     return jsonify({"reply": "Sorry, I couldn't find that info."})
 
 if __name__ == "__main__":
-    app.run()
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
