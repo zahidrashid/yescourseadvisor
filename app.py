@@ -7,7 +7,7 @@ app = Flask(__name__)
 CORS(app)
 
 # ✅ OpenAI client
-client = OpenAI(api_key=os.environ.get("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"))
+client = OpenAI(api_key=os.environ.get("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"))
 
 # ✅ Load TXT data safely
 def load_data():
