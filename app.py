@@ -18,16 +18,15 @@ DATA = load_data()
 LINES = DATA.split("\n")
 
 COURSE_KEYWORDS = ["diploma", "certificate", "bsc", "ba", "acca", "design", "program"]
+LOCATION_KEYWORDS = ["located", "kuala lumpur", "block", "jalan"]
+FACILITY_KEYWORDS = ["level", "facility", "department"]
 
-# Clean line (remove junk text)
+# Clean text
 def clean_line(line):
-    line = line.strip()
-    line = line.replace("art & design:", "")
-    line = line.replace("programs:", "")
-    return line
+    return line.strip()
 
-# Smart filtered search
-def search_courses(question):
+# Generic search
+def search_filtered(question, keywords):
     words = question.lower().split()
     scored = []
 
@@ -43,11 +42,7 @@ def search_courses(question):
                     score += 1
 
         if score > 0:
-            if not any(k in line for k in COURSE_KEYWORDS):
-                continue
-
-            # remove unwanted lines
-            if "located" in line or "level" in line or "block" in line:
+            if not any(k in line for k in keywords):
                 continue
 
             scored.append((score, clean_line(line)))
@@ -63,22 +58,32 @@ def search_courses(question):
             seen.add(line)
 
     if results:
-        return "• " + "\n• ".join(results[:8])
+        return "• " + "\n• ".join(results[:5])
 
-    return "Sorry, no courses found."
+    return "Sorry, I couldn't find that information."
 
 @app.route("/")
 def home():
-    return "Clean Smart Bot Running"
+    return "Smart Multi Bot Running"
 
 @app.route("/chat", methods=["POST"])
 def chat():
     question = request.json.get("message", "").lower()
 
-    if "course" in question or "program" in question or "design" in question:
-        return jsonify({"reply": search_courses(question)})
+    # 📚 Courses
+    if "course" in question or "program" in question:
+        return jsonify({"reply": search_filtered(question, COURSE_KEYWORDS)})
 
-    return jsonify({"reply": "Please ask about courses or programs."})
+    # 📍 Location
+    if "location" in question or "where" in question or "address" in question:
+        return jsonify({"reply": search_filtered(question, LOCATION_KEYWORDS)})
+
+    # 🏫 Facilities
+    if "facility" in question or "class" in question:
+        return jsonify({"reply": search_filtered(question, FACILITY_KEYWORDS)})
+
+    # fallback
+    return jsonify({"reply": "Please ask about courses, location, or facilities."})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
