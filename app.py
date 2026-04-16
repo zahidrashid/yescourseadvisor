@@ -7,7 +7,7 @@ from openai import OpenAI
 app = Flask(__name__)
 CORS(app)
 
-client = OpenAI(api_key=os.environ.get("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"))
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
 # 📂 Extract text from all PDFs
 def load_pdfs():
