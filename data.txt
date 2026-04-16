@@ -1,0 +1,12 @@
+Course: BCA
+Duration: 3 years
+Fee: 50000 per year
+Eligibility: 12th pass
+
+Course: BBA
+Duration: 3 years
+Fee: 40000 per year
+Eligibility: 12th pass
+
+Faculty:
+Computer Science HOD: Mr. XYZ

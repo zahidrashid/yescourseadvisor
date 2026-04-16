@@ -1,0 +1,26 @@
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+# Load data
+with open("data.txt", "r", encoding="utf-8") as f:
+    DATA = f.read().lower()
+
+@app.route("/chat", methods=["POST"])
+def chat():
+    question = request.json["message"].lower()
+
+    # Simple keyword matching
+    if "bca" in question and "fee" in question:
+        return jsonify({"reply": "BCA fee is 50000 per year"})
+    
+    if "bba" in question and "fee" in question:
+        return jsonify({"reply": "BBA fee is 40000 per year"})
+    
+    if "faculty" in question:
+        return jsonify({"reply": "Computer Science HOD is Mr. XYZ"})
+    
+    return jsonify({"reply": "Sorry, I couldn't find that info."})
+
+if __name__ == "__main__":
+    app.run()
