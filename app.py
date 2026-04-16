@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
-import pdfplumber
 from openai import OpenAI
 
 app = Flask(__name__)
@@ -10,32 +9,17 @@ CORS(app)
 # ✅ OpenAI client
 client = OpenAI(api_key=os.environ.get("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"))
 
-# ✅ Load PDFs safely
-def load_pdfs():
-    text = ""
-    folder = "pdfs"
+# ✅ Load TXT data
+def load_data():
+    try:
+        with open("data.txt", "r", encoding="utf-8") as f:
+            return f.read()
+    except:
+        return "No data available."
 
-    # If folder missing
-    if not os.path.exists(folder):
-        return "No PDF data available."
+DATA = load_data()
 
-    for file in os.listdir(folder):
-        if file.endswith(".pdf"):
-            try:
-                with pdfplumber.open(os.path.join(folder, file)) as pdf:
-                    for page in pdf.pages:
-                        page_text = page.extract_text()
-                        if page_text:   # avoid None error
-                            text += page_text + "\n"
-            except Exception as e:
-                print(f"Error reading {file}: {e}")
-
-    return text
-
-# Load data once
-DATA = load_pdfs()
-
-# ✅ Smart keyword-based context search
+# ✅ Smart context search
 def search_context(question):
     chunks = DATA.split("\n")
     relevant = []
@@ -44,13 +28,12 @@ def search_context(question):
         if any(word in chunk.lower() for word in question.lower().split()):
             relevant.append(chunk)
 
-    return "\n".join(relevant[:10])  # limit context
+    return "\n".join(relevant[:10])  # limit
 
 @app.route("/")
 def home():
-    return "AI PDF Bot Running"
+    return "AI TXT Bot Running"
 
-# ✅ Chat endpoint with error handling
 @app.route("/chat", methods=["POST"])
 def chat():
     try:
@@ -85,6 +68,5 @@ def chat():
         print("ERROR:", str(e))
         return jsonify({"reply": f"Server Error: {str(e)}"})
 
-# ✅ Required for Render
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
