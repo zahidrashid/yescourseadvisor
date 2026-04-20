@@ -1,11 +1,14 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
+import re
 
 app = Flask(__name__)
 CORS(app)
 
-# Load data
+# ---------------------------
+# Load & Clean Data
+# ---------------------------
 def load_data():
     try:
         with open("data.txt", "r", encoding="utf-8") as f:
@@ -13,11 +16,17 @@ def load_data():
     except:
         return ""
 
-DATA = load_data()
+def clean_text(text):
+    return re.sub(r'[^a-z0-9 ]', '', text.lower())
 
-# 🔥 SMART SEARCH (handles large data cleanly)
+# ---------------------------
+# Smart Search Engine
+# ---------------------------
 def search_answer(question):
-    question = question.lower()
+    DATA = load_data()  # 🔥 always reload latest data
+    question_clean = clean_text(question)
+    words = question_clean.split()
+
     lines = DATA.split("\n")
 
     matched_blocks = []
@@ -30,7 +39,6 @@ def search_answer(question):
         if not line:
             continue
 
-        # Detect headings (like "Location:", "Diploma Programs:")
         if ":" in line and len(line) < 60:
             if current_block:
                 matched_blocks.append(current_block)
@@ -41,13 +49,27 @@ def search_answer(question):
     if current_block:
         matched_blocks.append(current_block)
 
-    # Step 2: Score blocks based on question
+    # Step 2: Score blocks (IMPROVED)
     scored = []
-    words = question.split()
 
     for block in matched_blocks:
         text = " ".join(block).lower()
-        score = sum(1 for word in words if word in text)
+        text_words = text.split()
+
+        score = 0
+
+        for word in words:
+            if word in text_words:
+                score += 3  # exact word match
+
+            elif word in text:
+                score += 1  # partial match
+
+        # 🔥 Boost if keyword appears in heading
+        heading = block[0].lower()
+        for word in words:
+            if word in heading:
+                score += 5
 
         if score > 0:
             scored.append((score, block))
@@ -65,23 +87,44 @@ def search_answer(question):
     else:
         return "❓ Sorry, I couldn't find that information."
 
-# Home route
+# ---------------------------
+# Routes
+# ---------------------------
 @app.route("/")
 def home():
-    return "Smart Bot Running (No API Zahid 🚀)"
+    return "Smart Yes Bot Running 🚀"
 
-# Chat route
+@app.route("/health")
+def health():
+    return {"status": "ok"}
+
 @app.route("/chat", methods=["POST"])
 def chat():
-    question = request.json.get("message", "")
+    data = request.get_json()
+
+    if not data or "message" not in data:
+        return jsonify({
+            "reply": "Please send a message.",
+            "status": "error"
+        })
+
+    question = data.get("message", "").strip()
 
     if not question:
-        return jsonify({"reply": "Please enter a question."})
+        return jsonify({
+            "reply": "Please enter a question.",
+            "status": "error"
+        })
 
     answer = search_answer(question)
 
-    return jsonify({"reply": answer})
+    return jsonify({
+        "reply": answer,
+        "status": "success"
+    })
 
-# Run app
+# ---------------------------
+# Run App
+# ---------------------------
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
