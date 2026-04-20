@@ -1,6 +1,4 @@
-College Name: YES International College
-
-Location:
+College Overview:
 YES International College is located at Level UG, Block C, Megan Avenue 2, Jalan Yap Kwan Seng, Kuala Lumpur.
 
 Campus Facilities:
@@ -9,7 +7,8 @@ COLLA Department and Culinary Program Facilities are located in Block B.
 
 Programs:
 
-ACCA
+ACCA:
+Professional accounting qualification program.
 
 Certificates:
 Business Studies
@@ -65,8 +64,5 @@ BA International Business with Marketing (Top-up)
 BA Business Finance and Accounting (Top-up)
 BA Business and Enterprise (Online)
 
-Other:
-Corporate Training: Know Yourself, Know Others
-
-zahid rashid lone from baramulla
-
+Corporate Training:
+Know Yourself, Know Others
