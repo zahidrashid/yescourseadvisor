@@ -26,8 +26,8 @@ def load_data():
             with open("data.txt", "r", encoding="utf-8") as f:
                 DATA_CACHE = f.read()
             LAST_MODIFIED = mtime
-    except:
-        pass
+    except Exception as e:
+        print("LOAD DATA ERROR:", e)
     return DATA_CACHE
 
 def clean_text(text):
@@ -46,13 +46,13 @@ def search_answer(question):
     matched_blocks = []
     current_block = []
 
-    # Group into sections
     for line in lines:
         line = line.strip()
 
         if not line:
             continue
 
+        # detect heading
         if ":" in line and len(line) < 60:
             if current_block:
                 matched_blocks.append(current_block)
@@ -63,7 +63,6 @@ def search_answer(question):
     if current_block:
         matched_blocks.append(current_block)
 
-    # Score blocks
     scored = []
 
     for block in matched_blocks:
@@ -75,7 +74,7 @@ def search_answer(question):
         common_words = set(words) & set(text_words)
         score += len(common_words) * 3
 
-        # Heading boost
+        # heading boost
         heading = block[0].lower()
         for word in words:
             if word in heading:
@@ -90,17 +89,14 @@ def search_answer(question):
     for _, block in scored[:3]:
         results.append("\n".join(block))
 
-    if results:
-        return "\n\n".join(results)
-    else:
-        return ""
+    return "\n\n".join(results)
 
 # ---------------------------
 # AI Response (Gemini)
 # ---------------------------
 def generate_ai_response(question, context):
     try:
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        model = genai.GenerativeModel("gemini-2.0-flash")
 
         prompt = f"""
 You are a helpful chatbot.
@@ -129,7 +125,7 @@ Question:
 # ---------------------------
 @app.route("/")
 def home():
-    return "Smart AI Bot (Gemini) Running google api"
+    return "Smart AI Bot (Gemini) Running newww"
 
 @app.route("/health")
 def health():
