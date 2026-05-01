@@ -97,6 +97,7 @@ You are a helpful chatbot.
 Use the context below to answer the question clearly.
 If the answer is not in the context, say:
 "I don't have that information."
+Keep the answer short and natural.
 
 Context:
 {context}
@@ -106,7 +107,7 @@ Question:
 """
 
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="llama-3.1-8b-instant",  # ✅ Updated working model
             messages=[
                 {"role": "system", "content": "You are a helpful assistant."},
                 {"role": "user", "content": prompt}
@@ -124,7 +125,7 @@ Question:
 # ---------------------------
 @app.route("/")
 def home():
-    return "Smart AI Bot (Groq) Running 🚀"
+    return "Smart AI Bot (Groq) Running New"
 
 @app.route("/health")
 def health():
@@ -148,7 +149,10 @@ def chat():
             "status": "error"
         })
 
+    # Step 1: Search your data
     context = search_answer(question)
+
+    # Step 2: Generate AI response
     answer = generate_ai_response(question, context)
 
     return jsonify({
@@ -157,7 +161,7 @@ def chat():
     })
 
 # ---------------------------
-# Run
+# Run App
 # ---------------------------
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
