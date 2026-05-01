@@ -2,15 +2,15 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import re
-from openai import OpenAI
+import google.generativeai as genai
 
 app = Flask(__name__)
 CORS(app)
 
 # ---------------------------
-# OpenAI Setup
+# Google Gemini Setup
 # ---------------------------
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+genai.configure(api_key=os.environ.get("GOOGLE_API_KEY"))
 
 # ---------------------------
 # Cache Data (FAST)
@@ -72,7 +72,6 @@ def search_answer(question):
 
         score = 0
 
-        # Unique matches only
         common_words = set(words) & set(text_words)
         score += len(common_words) * 3
 
@@ -82,7 +81,7 @@ def search_answer(question):
             if word in heading:
                 score += 5
 
-        if score > 2:  # threshold
+        if score > 2:
             scored.append((score, block))
 
     scored.sort(key=lambda x: x[0], reverse=True)
@@ -97,14 +96,16 @@ def search_answer(question):
         return ""
 
 # ---------------------------
-# AI Response Generator
+# AI Response (Gemini)
 # ---------------------------
 def generate_ai_response(question, context):
     try:
-        prompt = f"""
-You are a helpful course advisor chatbot.
+        model = genai.GenerativeModel("gemini-1.5-flash")
 
-Use the context below to answer the question.
+        prompt = f"""
+You are a helpful chatbot.
+
+Use the context below to answer the question clearly.
 If the answer is not in the context, say:
 "I don't have that information right now."
 
@@ -115,25 +116,20 @@ Question:
 {question}
 """
 
-        response = client.chat.completions.create(
-            model="gpt-4o-mini",
-            messages=[
-                {"role": "system", "content": "You are a helpful assistant."},
-                {"role": "user", "content": prompt}
-            ]
-        )
+        response = model.generate_content(prompt)
 
-        return response.choices[0].message.content
+        return response.text
 
     except Exception as e:
-        return "⚠️ AI service is currently unavailable."
+        print("GEMINI ERROR:", e)
+        return f"⚠️ Error: {str(e)}"
 
 # ---------------------------
 # Routes
 # ---------------------------
 @app.route("/")
 def home():
-    return "Smart AI Bot Running zahid"
+    return "Smart AI Bot (Gemini) Running google api"
 
 @app.route("/health")
 def health():
