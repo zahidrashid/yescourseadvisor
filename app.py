@@ -2,19 +2,33 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import re
+from openai import OpenAI
 
 app = Flask(__name__)
 CORS(app)
 
 # ---------------------------
-# Load & Clean Data
+# OpenAI Setup
 # ---------------------------
+client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
+
+# ---------------------------
+# Cache Data (FAST)
+# ---------------------------
+DATA_CACHE = ""
+LAST_MODIFIED = 0
+
 def load_data():
+    global DATA_CACHE, LAST_MODIFIED
     try:
-        with open("data.txt", "r", encoding="utf-8") as f:
-            return f.read()
+        mtime = os.path.getmtime("data.txt")
+        if mtime != LAST_MODIFIED:
+            with open("data.txt", "r", encoding="utf-8") as f:
+                DATA_CACHE = f.read()
+            LAST_MODIFIED = mtime
     except:
-        return ""
+        pass
+    return DATA_CACHE
 
 def clean_text(text):
     return re.sub(r'[^a-z0-9 ]', '', text.lower())
@@ -23,7 +37,7 @@ def clean_text(text):
 # Smart Search Engine
 # ---------------------------
 def search_answer(question):
-    DATA = load_data()  # 🔥 always reload latest data
+    DATA = load_data()
     question_clean = clean_text(question)
     words = question_clean.split()
 
@@ -32,7 +46,7 @@ def search_answer(question):
     matched_blocks = []
     current_block = []
 
-    # Step 1: Group into sections
+    # Group into sections
     for line in lines:
         line = line.strip()
 
@@ -49,7 +63,7 @@ def search_answer(question):
     if current_block:
         matched_blocks.append(current_block)
 
-    # Step 2: Score blocks (IMPROVED)
+    # Score blocks
     scored = []
 
     for block in matched_blocks:
@@ -58,26 +72,21 @@ def search_answer(question):
 
         score = 0
 
-        for word in words:
-            if word in text_words:
-                score += 3  # exact word match
+        # Unique matches only
+        common_words = set(words) & set(text_words)
+        score += len(common_words) * 3
 
-            elif word in text:
-                score += 1  # partial match
-
-        # 🔥 Boost if keyword appears in heading
+        # Heading boost
         heading = block[0].lower()
         for word in words:
             if word in heading:
                 score += 5
 
-        if score > 0:
+        if score > 2:  # threshold
             scored.append((score, block))
 
-    # Step 3: Sort best matches
     scored.sort(key=lambda x: x[0], reverse=True)
 
-    # Step 4: Return top results
     results = []
     for _, block in scored[:3]:
         results.append("\n".join(block))
@@ -85,14 +94,46 @@ def search_answer(question):
     if results:
         return "\n\n".join(results)
     else:
-        return "❓ Sorry, I couldn't find that information."
+        return ""
+
+# ---------------------------
+# AI Response Generator
+# ---------------------------
+def generate_ai_response(question, context):
+    try:
+        prompt = f"""
+You are a helpful course advisor chatbot.
+
+Use the context below to answer the question.
+If the answer is not in the context, say:
+"I don't have that information right now."
+
+Context:
+{context}
+
+Question:
+{question}
+"""
+
+        response = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant."},
+                {"role": "user", "content": prompt}
+            ]
+        )
+
+        return response.choices[0].message.content
+
+    except Exception as e:
+        return "⚠️ AI service is currently unavailable."
 
 # ---------------------------
 # Routes
 # ---------------------------
 @app.route("/")
 def home():
-    return "Smart Yes Bot Running 🚀"
+    return "Smart AI Bot Running zahid"
 
 @app.route("/health")
 def health():
@@ -116,7 +157,11 @@ def chat():
             "status": "error"
         })
 
-    answer = search_answer(question)
+    # Step 1: Search your data
+    context = search_answer(question)
+
+    # Step 2: Generate AI answer
+    answer = generate_ai_response(question, context)
 
     return jsonify({
         "reply": answer,
