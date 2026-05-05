@@ -1,6 +1,9 @@
 College Overview:
 YES International College is located at Level UG, Block C, Megan Avenue 2, Jalan Yap Kwan Seng, Kuala Lumpur.
-https://yes.edu.my/contact-us/
+
+website: https://yes.edu.my
+
+Contact us: https://yes.edu.my/contact-us/
 
 Campus Facilities / location:
 Classes are held at Level LG, Level 8, Level 11, and Level 18.
