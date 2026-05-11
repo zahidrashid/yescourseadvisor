@@ -14,14 +14,87 @@ Programs:
 
 ACCA:
 
-A  A01 Programme Course (Enter Full Information) Association of Chartered Certified Accountants Official registered name
-A  A02 Programme Code MQA/FA8401
-A  A03 Programme Summary Brief description for chatbot
-A  A04 Awarding Body Association of Chartered Certified Accountants Degree awarding institution
-A  A05 Duration 3 years 6 semesters Total program duration
-A  A06 Mode of Study Online,Full-time/part-time Study mode options
-A  A07 Intake Months Available intake periods
-A  A08 Entry Requirements Academic entry criteria
+Section Field ID Field Name Descriptions Notes
+A A01 Programme Course (Enter Full Information) Association of Chartered Certified Accountants Official registered name
+A A02 Programme Code MQA/FA8401
+A A03 Programme Summary Brief description for chatbot
+A A04 Awarding Body Association of Chartered Certified Accountants Degree awarding institution
+A A05 Duration 3 years 6 semesters Total program duration
+A A06 Mode of Study Online,Full-time/part-time Study mode options
+A A07 Intake Months Available intake periods
+A A08 Entry Requirements Academic entry criteria
+B B02 Main Subjects Overview Key subject areas
+B B04 Year 1 Subjects First year curriculum
+B B05 Year 2 Subjects Second year curriculum
+B B06 Year 3 Subjects Final year curriculum
+C C01 Overall Study Mode 1.Coursework + Final Exam Theory vs practical ratio
+D D01 Career Pathways
+D D02 Degree Progression Further study options
+E E01 Brochure Link Digital brochure location
+E E02 Application Link Direct application portal
+E E03 Lecturer In Charge Academic staff responsible
+The Association of Chartered Certified Accountants is a
+professional qualification in accounting and finance.
+1. January
+2. July
+• SPM 3 credits incl. of Eng and Mathematics
+• Or equivalent qualifications
+accounting, finance, audit, taxation, law, management,
+strategy, and ethics.
+1. MPU papers(International students only)
+2. Business and Technology (BT)
+3. Financial Accounting (FA)
+4. Management Accounting (MA)
+1. Corporate and Business Law (LW)
+2. Taxation (TX)
+3. Financial Reporting (FR)
+4. Performance Management (PM)
+5. Financial Management (FM)
+6. Audit and Assurance (AA)
+Essentials
+1. Strategic Business Reporting (SBR)
+2. Strategic Business Leader (SBL)
+Options
+Any two papers out of four
+1. Advanced Financial Management (AFM)
+2. Advanced Audit and Assurance (AAA)
+3. Advanced Taxation (ATX)
+4. Advanced Performance Management (APM)
+Diverse career pathways leading to Financial Accountant,
+Auditor, Tax Consultant, Management Accountant,
+Finance Manager, and even CFO.
+Further study in Degree in Computer Science or other
+field in computing
+https://tinyurl.com/2x5haevp
+1. Mr.Veerapan Pariakuruppan
+2. Mr.Ganes Moorthy
+3. Mr.Liew Hong Jin
+4. Mr.Md Kamrul Hasan Khan
+Year Semester Subject Code Subject Name Credit Hours Classification Prerequisites
+1 1 FBT Business And Technology 4
+1 1 FMA Management Accounting 4
+1 1 FFA Financial Accounting 4
+1 1 MPU 3113 3
+1 2 LW (F4) 4
+1 2 PM(F5) Performance Management 4
+1 2 MPU 3123 Hubungan Etnik 3
+2 3 LW(F4) Taxation 4
+2 3 PM(F5) Financial Reporting 4
+2 3 MPU3123 Thinking Skill 3
+3 4 TX(F6) Audit and Assurance 4
+3 4 FM(F9) Financial Managment 4
+3 4 MPU 3223 Bahasa Kebangsaan A 3
+3 5 SBR Strategic Business Reporting 4
+3 5 SBL Strategic Business Leader 4
+3 6 ATX Advance Taxation 4
+3 6 AFM Advance Financial Management 4
+3 6 AAA Advance Audit and Assurance 4
+3 6 APM Advance Performance Management 4
+3 6 MPU 3313 Introduction to Comparative Religion 3
+Tamadun Asia dan
+Tamadun Islam
+ Corporate Business
+and Law
 
 
 
