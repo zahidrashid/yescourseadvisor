@@ -12,7 +12,7 @@ COLLA Department and Culinary Program Facilities are located in Block B.
 Programs:
 
 
-ACCA
+ACCA:
 
 A  A01 Programme Course (Enter Full Information) Association of Chartered Certified Accountants Official registered name
 A  A02 Programme Code MQA/FA8401
