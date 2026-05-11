@@ -66,10 +66,13 @@ Finance Manager, and even CFO.
 Further study in Degree in Computer Science or other
 field in computing
 https://tinyurl.com/2x5haevp
+
+ACCA Lecturer In Charge 
 1. Mr.Veerapan Pariakuruppan
 2. Mr.Ganes Moorthy
 3. Mr.Liew Hong Jin
 4. Mr.Md Kamrul Hasan Khan
+
 Year Semester Subject Code Subject Name Credit Hours Classification Prerequisites
 1 1 FBT Business And Technology 4
 1 1 FMA Management Accounting 4
