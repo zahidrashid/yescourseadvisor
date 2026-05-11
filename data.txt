@@ -11,7 +11,20 @@ COLLA Department and Culinary Program Facilities are located in Block B.
 
 Programs:
 
-ACCA:
+
+ACCA
+
+A  A01 Programme Course (Enter Full Information) Association of Chartered Certified Accountants Official registered name
+A  A02 Programme Code MQA/FA8401
+A  A03 Programme Summary Brief description for chatbot
+A  A04 Awarding Body Association of Chartered Certified Accountants Degree awarding institution
+A  A05 Duration 3 years 6 semesters Total program duration
+A  A06 Mode of Study Online,Full-time/part-time Study mode options
+A  A07 Intake Months Available intake periods
+A  A08 Entry Requirements Academic entry criteria
+
+
+
 Professional accounting qualification program.
 
 Certificates:
