@@ -1,176 +1,136 @@
-College Overview:
-YES International College is located at Level UG, Block C, Megan Avenue 2, Jalan Yap Kwan Seng, Kuala Lumpur.
-
-website: https://yes.edu.my
-
-Contact us: https://yes.edu.my/contact-us/
-
-========================================
-PROGRAMME INFORMATION
-========================================
-
-[A01] Programme / Course
+Programme:
 Association of Chartered Certified Accountants (ACCA)
 
-[A02] Programme Code
+Keywords:
+ACCA, accounting, finance, audit, taxation, business, financial management, auditor, accountant
+
+Programme Code:
 MQA/FA8401
 
-[A03] Programme Summary
+Programme Summary:
 The Association of Chartered Certified Accountants (ACCA) is a professional qualification in accounting and finance that prepares students for careers in auditing, taxation, financial management, accounting, and business strategy.
 
-[A04] Awarding Body
+Awarding Body:
 Association of Chartered Certified Accountants
 
-[A05] Duration
+Duration:
 3 Years / 6 Semesters
 
-[A06] Mode of Study
+Mode of Study:
 Online, Full-time, Part-time
 
-[A07] Intake Months
-1. January
-2. July
+Intake Months:
+January
+July
 
-[A08] Entry Requirements
-• SPM with 3 credits including English and Mathematics
-• Or equivalent qualifications
+Entry Requirements:
+SPM with 3 credits including English and Mathematics
+OR equivalent qualifications
 
-========================================
-PROGRAMME STRUCTURE
-========================================
+Main Subjects Overview:
+Accounting
+Finance
+Audit
+Taxation
+Law
+Management
+Strategy
+Ethics
 
-[B02] Main Subjects Overview
-• Accounting
-• Finance
-• Audit
-• Taxation
-• Law
-• Management
-• Strategy
-• Ethics
+Year 1 Subjects:
 
-----------------------------------------
-[B04] Year 1 Subjects
-----------------------------------------
+Semester 1:
+FBT - Business and Technology
+FMA - Management Accounting
+FFA - Financial Accounting
+MPU3113 - Tamadun Asia dan Tamadun Islam
 
-Semester 1
-1. FBT – Business and Technology
-2. FMA – Management Accounting
-3. FFA – Financial Accounting
-4. MPU3113 – Tamadun Asia dan Tamadun Islam
+Semester 2:
+LW (F4) - Corporate Business and Law
+PM (F5) - Performance Management
+MPU3123 - Hubungan Etnik
 
-Semester 2
-1. LW (F4) – Corporate Business and Law
-2. PM (F5) – Performance Management
-3. MPU3123 – Hubungan Etnik
+Year 2 Subjects:
 
-----------------------------------------
-[B05] Year 2 Subjects
-----------------------------------------
+Semester 3:
+TX (F6) - Taxation
+FR (F7) - Financial Reporting
+MPU3123 - Thinking Skills
 
-Semester 3
-1. TX (F6) – Taxation
-2. FR (F7) – Financial Reporting
-3. MPU3123 – Thinking Skills
+Semester 4:
+AA (F8) - Audit and Assurance
+FM (F9) - Financial Management
+MPU3223 - Bahasa Kebangsaan A
 
-Semester 4
-1. AA (F8) – Audit and Assurance
-2. FM (F9) – Financial Management
-3. MPU3223 – Bahasa Kebangsaan A
+Year 3 Subjects:
 
-----------------------------------------
-[B06] Year 3 Subjects
-----------------------------------------
+Semester 5:
+SBR - Strategic Business Reporting
+SBL - Strategic Business Leader
 
-Semester 5 (Essentials)
-1. SBR – Strategic Business Reporting
-2. SBL – Strategic Business Leader
+Semester 6:
+AFM - Advanced Financial Management
+AAA - Advanced Audit and Assurance
+ATX - Advanced Taxation
+APM - Advanced Performance Management
+MPU3313 - Introduction to Comparative Religion
 
-Semester 6 (Options – Any 2 Papers)
-1. AFM – Advanced Financial Management
-2. AAA – Advanced Audit and Assurance
-3. ATX – Advanced Taxation
-4. APM – Advanced Performance Management
-5. MPU3313 – Introduction to Comparative Religion
+Assessment Method:
+Coursework and Final Examination
 
-========================================
-ASSESSMENT
-========================================
+Career Pathways:
+Financial Accountant
+Auditor
+Tax Consultant
+Management Accountant
+Finance Manager
+Chief Financial Officer (CFO)
 
-[C01] Overall Study Mode
-Coursework + Final Examination
+Degree Progression:
+Further study in Degree in Computer Science or other fields in computing
 
-========================================
-CAREER & PROGRESSION
-========================================
-
-[D01] Career Pathways
-• Financial Accountant
-• Auditor
-• Tax Consultant
-• Management Accountant
-• Finance Manager
-• Chief Financial Officer (CFO)
-
-[D02] Degree Progression
-Further study in Degree in Computer Science or other fields in computing.
-
-========================================
-ADDITIONAL INFORMATION
-========================================
-
-[E01] Brochure Link
+Brochure Link:
 https://tinyurl.com/2x5haevp
 
-[E02] Application Link
+Application Link:
 Please contact the college administration for application details.
 
-[E03] Lecturers In Charge
-1. Mr. Veerapan Pariakuruppan
-2. Mr. Ganes Moorthy
-3. Mr. Liew Hong Jin
-4. Mr. Md Kamrul Hasan Khan
+Lecturers In Charge:
+Mr. Veerapan Pariakuruppan
+Mr. Ganes Moorthy
+Mr. Liew Hong Jin
+Mr. Md Kamrul Hasan Khan
 
-========================================
-DETAILED SUBJECT STRUCTURE
-========================================
+Detailed Subject Structure:
 
-Year 1 - Semester 1
-----------------------------------------
-Code        Subject Name                         Credit Hours
-FBT         Business and Technology             4
-FMA         Management Accounting               4
-FFA         Financial Accounting                4
-MPU3113     Tamadun Asia dan Tamadun Islam      3
+Year 1 Semester 1:
+FBT | Business and Technology | 4 Credit Hours
+FMA | Management Accounting | 4 Credit Hours
+FFA | Financial Accounting | 4 Credit Hours
+MPU3113 | Tamadun Asia dan Tamadun Islam | 3 Credit Hours
 
-Year 1 - Semester 2
-----------------------------------------
-LW(F4)      Corporate Business and Law          4
-PM(F5)      Performance Management              4
-MPU3123     Hubungan Etnik                      3
+Year 1 Semester 2:
+LW(F4) | Corporate Business and Law | 4 Credit Hours
+PM(F5) | Performance Management | 4 Credit Hours
+MPU3123 | Hubungan Etnik | 3 Credit Hours
 
-Year 2 - Semester 3
-----------------------------------------
-TX(F6)      Taxation                            4
-FR(F7)      Financial Reporting                 4
-MPU3123     Thinking Skills                     3
+Year 2 Semester 3:
+TX(F6) | Taxation | 4 Credit Hours
+FR(F7) | Financial Reporting | 4 Credit Hours
+MPU3123 | Thinking Skills | 3 Credit Hours
 
-Year 2 - Semester 4
-----------------------------------------
-AA(F8)      Audit and Assurance                 4
-FM(F9)      Financial Management                4
-MPU3223     Bahasa Kebangsaan A                 3
+Year 2 Semester 4:
+AA(F8) | Audit and Assurance | 4 Credit Hours
+FM(F9) | Financial Management | 4 Credit Hours
+MPU3223 | Bahasa Kebangsaan A | 3 Credit Hours
 
-Year 3 - Semester 5
-----------------------------------------
-SBR         Strategic Business Reporting        4
-SBL         Strategic Business Leader           4
+Year 3 Semester 5:
+SBR | Strategic Business Reporting | 4 Credit Hours
+SBL | Strategic Business Leader | 4 Credit Hours
 
-Year 3 - Semester 6
-----------------------------------------
-ATX         Advanced Taxation                   4
-AFM         Advanced Financial Management       4
-AAA         Advanced Audit and Assurance        4
-APM         Advanced Performance Management     4
-MPU3313     Introduction to Comparative Religion 3
-
+Year 3 Semester 6:
+AFM | Advanced Financial Management | 4 Credit Hours
+AAA | Advanced Audit and Assurance | 4 Credit Hours
+ATX | Advanced Taxation | 4 Credit Hours
+APM | Advanced Performance Management | 4 Credit Hours
+MPU3313 | Introduction to Comparative Religion | 3 Credit Hours
