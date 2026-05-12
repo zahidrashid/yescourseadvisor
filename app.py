@@ -1,35 +1,48 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+from groq import Groq
 import os
 import re
 from difflib import SequenceMatcher
-from groq import Groq
+
+# ======================================================
+# FLASK SETUP
+# ======================================================
 
 app = Flask(__name__)
 CORS(app)
 
-# ==========================================
+# ======================================================
 # GROQ SETUP
-# ==========================================
+# ======================================================
+
 client = Groq(
     api_key=os.environ.get("GROQ_API_KEY")
 )
 
-# ==========================================
-# CACHE DATA
-# ==========================================
+# ======================================================
+# CACHE
+# ======================================================
+
 DATA_CACHE = ""
 LAST_MODIFIED = 0
+
+# ======================================================
+# LOAD DATA
+# ======================================================
 
 def load_data():
     global DATA_CACHE, LAST_MODIFIED
 
     try:
-        mtime = os.path.getmtime("data.txt")
+        file_path = "data.txt"
 
-        # Reload only if file changed
+        mtime = os.path.getmtime(file_path)
+
+        # Reload only if updated
         if mtime != LAST_MODIFIED:
-            with open("data.txt", "r", encoding="utf-8") as f:
+
+            with open(file_path, "r", encoding="utf-8") as f:
                 DATA_CACHE = f.read()
 
             LAST_MODIFIED = mtime
@@ -39,24 +52,33 @@ def load_data():
 
     return DATA_CACHE
 
-# ==========================================
+# ======================================================
 # CLEAN TEXT
-# ==========================================
-def clean_text(text):
-    text = text.lower()
-    text = re.sub(r'[^a-z0-9\s]', ' ', text)
-    return text
+# ======================================================
 
-# ==========================================
+def clean_text(text):
+
+    text = text.lower()
+
+    text = re.sub(r'[^a-z0-9\s]', ' ', text)
+
+    text = re.sub(r'\s+', ' ', text)
+
+    return text.strip()
+
+# ======================================================
 # SIMILARITY
-# ==========================================
+# ======================================================
+
 def similarity(a, b):
     return SequenceMatcher(None, a, b).ratio()
 
-# ==========================================
-# SMART SEARCH
-# ==========================================
+# ======================================================
+# SEARCH FUNCTION
+# ======================================================
+
 def search_answer(question):
+
     DATA = load_data()
 
     if not DATA:
@@ -64,8 +86,33 @@ def search_answer(question):
 
     question_clean = clean_text(question)
 
-    # Split using blank lines
+    # Split sections using blank lines
     sections = re.split(r'\n\s*\n', DATA)
+
+    # ==================================================
+    # SPECIAL DIRECT MATCHES
+    # ==================================================
+
+    direct_keywords = [
+        "detailed subject structure",
+        "subject structure",
+        "all subjects",
+        "semester subjects",
+        "full subjects"
+    ]
+
+    for keyword in direct_keywords:
+
+        if keyword in question_clean:
+
+            for section in sections:
+
+                if "detailed subject structure" in clean_text(section):
+                    return section
+
+    # ==================================================
+    # NORMAL SEARCH
+    # ==================================================
 
     scored = []
 
@@ -78,41 +125,50 @@ def search_answer(question):
         q_words = question_clean.split()
         s_words = section_clean.split()
 
-        # Flexible keyword matching
+        # Exact + partial matching
         for qw in q_words:
+
             for sw in s_words:
 
+                # Exact match
                 if qw == sw:
                     score += 5
 
+                # Partial match
                 elif qw in sw or sw in qw:
                     score += 2
 
-        # Similarity score
+        # Similarity boost
         sim = similarity(question_clean, section_clean)
+
         score += sim * 10
 
-        # Bonus for programme names
+        # ACCA bonus
         if "acca" in question_clean and "acca" in section_clean:
-            score += 15
+            score += 20
+
+        # Subject bonus
+        if "subject" in question_clean and "subject" in section_clean:
+            score += 10
 
         if score > 2:
             scored.append((score, section))
 
-    # Sort highest score first
+    # Sort by highest score
     scored.sort(reverse=True, key=lambda x: x[0])
 
-    # Get top sections
+    # Top matches
     top_sections = []
 
-    for score, section in scored[:8]:
+    for score, section in scored[:20]:
         top_sections.append(section)
 
     return "\n\n".join(top_sections)
 
-# ==========================================
+# ======================================================
 # AI RESPONSE
-# ==========================================
+# ======================================================
+
 def generate_ai_response(question, context):
 
     if not context.strip():
@@ -121,15 +177,15 @@ def generate_ai_response(question, context):
     try:
 
         prompt = f"""
-You are a college chatbot assistant.
+You are a helpful college chatbot assistant.
 
-IMPORTANT RULES:
+STRICT RULES:
 - Answer ONLY using the provided context.
 - Do NOT use outside knowledge.
-- Do NOT add extra information.
-- If information is missing, say:
+- Do NOT invent information.
+- If the information is missing, say:
   "I don't have that information."
-- Keep answers short, clear, and human-like.
+- Keep answers clear, natural, and accurate.
 
 CONTEXT:
 {context}
@@ -139,9 +195,13 @@ QUESTION:
 """
 
         response = client.chat.completions.create(
+
             model="llama-3.1-8b-instant",
+
             temperature=0,
-            max_tokens=300,
+
+            max_tokens=500,
+
             messages=[
                 {
                     "role": "system",
@@ -162,28 +222,35 @@ QUESTION:
         return answer
 
     except Exception as e:
+
         print("GROQ ERROR:", e)
+
         return "Server error. Please try again later."
 
-# ==========================================
-# HOME
-# ==========================================
+# ======================================================
+# HOME ROUTE
+# ======================================================
+
 @app.route("/")
 def home():
+
     return "Smart AI College Chatbot Running"
 
-# ==========================================
+# ======================================================
 # HEALTH CHECK
-# ==========================================
+# ======================================================
+
 @app.route("/health")
 def health():
+
     return jsonify({
         "status": "ok"
     })
 
-# ==========================================
-# CHAT API
-# ==========================================
+# ======================================================
+# CHAT ROUTE
+# ======================================================
+
 @app.route("/chat", methods=["POST"])
 def chat():
 
@@ -192,6 +259,7 @@ def chat():
         data = request.get_json()
 
         if not data:
+
             return jsonify({
                 "reply": "Please send a message.",
                 "status": "error"
@@ -200,15 +268,30 @@ def chat():
         question = data.get("message", "").strip()
 
         if not question:
+
             return jsonify({
                 "reply": "Please enter a question.",
                 "status": "error"
             })
 
-        # Step 1: Search data
+        # ==================================================
+        # SEARCH CONTEXT
+        # ==================================================
+
         context = search_answer(question)
 
-        # Step 2: Generate AI answer
+        print("\n==============================")
+        print("QUESTION:")
+        print(question)
+
+        print("\nCONTEXT:")
+        print(context)
+        print("==============================\n")
+
+        # ==================================================
+        # AI ANSWER
+        # ==================================================
+
         answer = generate_ai_response(question, context)
 
         return jsonify({
@@ -217,6 +300,7 @@ def chat():
         })
 
     except Exception as e:
+
         print("CHAT ERROR:", e)
 
         return jsonify({
@@ -224,9 +308,10 @@ def chat():
             "status": "error"
         })
 
-# ==========================================
+# ======================================================
 # RUN SERVER
-# ==========================================
+# ======================================================
+
 if __name__ == "__main__":
 
     app.run(
