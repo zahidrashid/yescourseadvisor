@@ -1,0 +1,79 @@
+CERTIFICATE IN SOFTWARE ENGINEERING
+
+SECTION A: PROGRAMME INFORMATION
+--------------------------------
+Programme Course: Certificate in Software Engineering
+Programme Code: (Not specified)
+Programme Summary: Foundational programme covering programming, systems, databases, networking, and software development skills.
+Awarding Body: (Not specified)
+Duration: (Not specified)
+Mode of Study: Full-time
+
+SECTION B: PROGRAMME STRUCTURE
+--------------------------------
+
+Year 1 - Semester 1:
+- CSC1101 – Introduction to Programming (4 credits)
+- CSC1102 – Computer Systems & Organization (3 credits)
+- CSC1103 – Mathematics for Computing (3 credits)
+- CSC1104 – English Communication (2 credits)
+- CSC1105 – Introduction to Information Technology (3 credits)
+
+Year 1 - Semester 2:
+- CSC1201 – Database Management Systems (4 credits)
+- CSC1202 – Discrete Mathematics (3 credits)
+- CSC1203 – Web Development Fundamentals (3 credits)
+- CSC1204 – Computer Networks Basics (3 credits)
+- CSC1205 – Professional Ethics in IT (2 credits)
+
+Year 2 - Semester 3:
+- CSC2101 – Data Structures & Algorithms (4 credits)
+- CSC2102 – Operating Systems (3 credits)
+- CSC2103 – Object-Oriented Programming (4 credits)
+- CSC2104 – Statistics for Computing (3 credits)
+
+Year 2 - Semester 4:
+- CSC2201 – Software Engineering (4 credits)
+- CSC2202 – Advanced Database Systems (3 credits)
+- CSC2203 – Network Security (3 credits)
+- CSC2204 – Human-Computer Interaction (3 credits)
+- CSC2301 – Advanced Web Technologies (3 credits)
+- CSC2302 – Database Administration (3 credits)
+- CSC2401 – Digital Marketing for IT (3 credits)
+
+Year 3 - Semester 5:
+- CSC3101 – Advanced Programming (4 credits)
+- CSC3102 – Cloud Computing (3 credits)
+- CSC3103 – Mobile Application Development (3 credits)
+- CSC3301 – System Analysis & Design (3 credits)
+- CSC3302 – Network Administration (3 credits)
+- CSC3303 – Software Testing & Quality Assurance (3 credits)
+- CSC3401 – IT Project Management (3 credits)
+- CSC3501 – Artificial Intelligence Basics (3 credits)
+- CSC2501 – Multimedia Systems (2 credits)
+
+Year 3 - Semester 6:
+- CSC3201 – Final Year Project (6 credits)
+- CSC3202 – Industrial Training (4 credits)
+
+SECTION C: STUDY MODE
+--------------------------------
+Overall Study Mode:
+- Coursework + Final Exam
+
+SECTION D: CAREER & PROGRESSION
+--------------------------------
+Career Pathways:
+- Software Developer
+- Web Developer
+- System Analyst
+- Network Engineer
+- IT Project Assistant
+
+Degree Progression:
+- Diploma or Degree in Software Engineering, Computer Science, or IT-related fields
+
+SECTION E: ADDITIONAL INFORMATION
+--------------------------------
+Application Link: (Not specified)
+Lecturer in Charge: (Not specified)
