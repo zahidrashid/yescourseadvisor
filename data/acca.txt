@@ -1,83 +1,143 @@
-ASSOCIATION OF CHARTERED CERTIFIED ACCOUNTANTS (ACCA)
+College Overview: YES International College is located at Level UG, Block C, Megan Avenue 2, Jalan Yap Kwan Seng, Kuala Lumpur. 
+Campus Facilities / location: Classes are held at Level LG, Level 8, Level 11, and Level 18. COLLA Department and Culinary Program Facilities are located in Block B.
 
-SECTION A: PROGRAMME INFORMATION
---------------------------------
-Programme Course: Association of Chartered Certified Accountants (ACCA)
-Programme Code: MQA/FA8401
+Programme:
+Association of Chartered Certified Accountants (ACCA)
+
+Keywords:
+ACCA, accounting, finance, audit, taxation, business, financial management, auditor, accountant
+
+Programme Code:
+MQA/FA8401
 
 Programme Summary:
-The ACCA is a globally recognised professional qualification in accounting and finance. It equips students with advanced knowledge and practical skills in financial management, auditing, taxation, and strategic business leadership, preparing them for professional careers in the accounting and finance industry.
+The Association of Chartered Certified Accountants (ACCA) is a professional qualification in accounting and finance that prepares students for careers in auditing, taxation, financial management, accounting, and business strategy.
 
-Awarding Body: Association of Chartered Certified Accountants (ACCA)
-Duration: 3 Years (6 semesters)
-Mode of Study: Full-time / Part-time / Online
-Intake Months: January, July
+Awarding Body:
+Association of Chartered Certified Accountants
+
+Duration:
+3 Years / 6 Semesters
+
+Mode of Study:
+Online, Full-time, Part-time
+
+Intake Months:
+January
+July
 
 Entry Requirements:
-- SPM: Minimum 3 credits including English and Mathematics
-- OR equivalent qualifications
+SPM with 3 credits including English and Mathematics
+OR equivalent qualifications
 
-SECTION B: PROGRAMME STRUCTURE
---------------------------------
 Main Subjects Overview:
-- Accounting
-- Finance
-- Audit and Assurance
-- Taxation
-- Business Law
-- Management and Strategy
-- Ethics and Professional Skills
+Accounting
+Finance
+Audit
+Taxation
+Law
+Management
+Strategy
+Ethics
 
 Year 1 Subjects:
-- Business and Technology (BT)
-- Financial Accounting (FA)
-- Management Accounting (MA)
-- MPU Subjects (for international students only)
+
+Semester 1:
+FBT - Business and Technology
+FMA - Management Accounting
+FFA - Financial Accounting
+MPU3113 - Tamadun Asia dan Tamadun Islam
+
+Semester 2:
+LW (F4) - Corporate Business and Law
+PM (F5) - Performance Management
+MPU3123 - Hubungan Etnik
 
 Year 2 Subjects:
-- Corporate and Business Law (LW)
-- Taxation (TX)
-- Financial Reporting (FR)
-- Performance Management (PM)
-- Financial Management (FM)
-- Audit and Assurance (AA)
+
+Semester 3:
+TX (F6) - Taxation
+FR (F7) - Financial Reporting
+MPU3123 - Thinking Skills
+
+Semester 4:
+AA (F8) - Audit and Assurance
+FM (F9) - Financial Management
+MPU3223 - Bahasa Kebangsaan A
 
 Year 3 Subjects:
-Essentials:
-- Strategic Business Reporting (SBR)
-- Strategic Business Leader (SBL)
 
-Options (choose any 2):
-- Advanced Financial Management (AFM)
-- Advanced Audit and Assurance (AAA)
-- Advanced Taxation (ATX)
-- Advanced Performance Management (APM)
+Semester 5:
+SBR - Strategic Business Reporting
+SBL - Strategic Business Leader
 
-SECTION C: STUDY MODE & ASSESSMENT
---------------------------------
-Overall Study Mode:
-- Coursework + Final Examination
+Semester 6:
+AFM - Advanced Financial Management
+AAA - Advanced Audit and Assurance
+ATX - Advanced Taxation
+APM - Advanced Performance Management
+MPU3313 - Introduction to Comparative Religion
 
-SECTION D: CAREER & PROGRESSION
---------------------------------
+Assessment Method:
+Coursework and Final Examination
+
 Career Pathways:
-- Financial Accountant
-- Auditor
-- Tax Consultant
-- Management Accountant
-- Finance Manager
-- Chief Financial Officer (CFO)
+Financial Accountant
+Auditor
+Tax Consultant
+Management Accountant
+Finance Manager
+Chief Financial Officer (CFO)
 
-Further Study:
-- Professional advancement within ACCA membership
-- Postgraduate studies in accounting, finance, or related fields
+Degree Progression:
+Further study in Degree in Computer Science or other fields in computing
 
-SECTION E: ADDITIONAL INFORMATION
---------------------------------
-Brochure Link: https://tinyurl.com/2x5haevp
-Application Link: (Not specified)
-Lecturer In Charge:
-- Mr. Veerapan Pariakuruppan
-- Mr. Ganes Moorthy
-- Mr. Liew Hong Jin
-- Mr. Md Kamrul Hasan Khan
+Brochure Link:
+https://tinyurl.com/2x5haevp
+
+Application Link:
+Please contact the college administration for application details.
+
+Lecturers In Charge for ACCA:
+Mr. Veerapan Pariakuruppan
+Mr. Ganes Moorthy
+Mr. Liew Hong Jin
+Mr. Md Kamrul Hasan Khan
+
+Detailed Subject Structure:
+
+Year 1 Semester 1:
+FBT | Business and Technology | 4 Credit Hours
+FMA | Management Accounting | 4 Credit Hours
+FFA | Financial Accounting | 4 Credit Hours
+MPU3113 | Tamadun Asia dan Tamadun Islam | 3 Credit Hours
+
+Year 1 Semester 2:
+LW(F4) | Corporate Business and Law | 4 Credit Hours
+PM(F5) | Performance Management | 4 Credit Hours
+MPU3123 | Hubungan Etnik | 3 Credit Hours
+
+Year 2 Semester 3:
+TX(F6) | Taxation | 4 Credit Hours
+FR(F7) | Financial Reporting | 4 Credit Hours
+MPU3123 | Thinking Skills | 3 Credit Hours
+
+Year 2 Semester 4:
+AA(F8) | Audit and Assurance | 4 Credit Hours
+FM(F9) | Financial Management | 4 Credit Hours
+MPU3223 | Bahasa Kebangsaan A | 3 Credit Hours
+
+Year 3 Semester 5:
+SBR | Strategic Business Reporting | 4 Credit Hours
+SBL | Strategic Business Leader | 4 Credit Hours
+
+Year 3 Semester 6:
+AFM | Advanced Financial Management | 4 Credit Hours
+AAA | Advanced Audit and Assurance | 4 Credit Hours
+ATX | Advanced Taxation | 4 Credit Hours
+APM | Advanced Performance Management | 4 Credit Hours
+MPU3313 | Introduction to Comparative Religion | 3 Credit Hours
+
+
+YES International College Registry Department Overview
+The Registry Department at YES International College is responsible for managing student administrative services, from admission to graduation. It is headed by Ms Norhanim Mohsin and provides essential support to both local and international students. The department ensures smooth academic progression by handling records, loans, visas, and other student-related processes. Below is a structured summary of the key information extracted from the provided registry document, organized for clarity.
