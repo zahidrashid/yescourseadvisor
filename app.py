@@ -16,55 +16,87 @@ client = Groq(
 )
 
 # ==========================================
-# CACHE DATA
+# MULTIPLE FILE CACHE SYSTEM
 # ==========================================
-DATA_CACHE = ""
-LAST_MODIFIED = 0
+DATA_CACHE = {}
+LAST_MODIFIED = {}
 
-def load_data():
-    global DATA_CACHE, LAST_MODIFIED
+# Folder containing txt files
+DATA_FOLDER = "data"
+
+def load_all_data():
+
+    global DATA_CACHE
+    global LAST_MODIFIED
+
+    combined_data = ""
 
     try:
-        mtime = os.path.getmtime("data.txt")
 
-        # Reload only if file changed
-        if mtime != LAST_MODIFIED:
-            with open("data.txt", "r", encoding="utf-8") as f:
-                DATA_CACHE = f.read()
+        # Create folder automatically
+        if not os.path.exists(DATA_FOLDER):
+            os.makedirs(DATA_FOLDER)
 
-            LAST_MODIFIED = mtime
+        # Read all txt files
+        for filename in os.listdir(DATA_FOLDER):
+
+            if filename.endswith(".txt"):
+
+                filepath = os.path.join(DATA_FOLDER, filename)
+
+                mtime = os.path.getmtime(filepath)
+
+                # Reload only if modified
+                if (
+                    filename not in LAST_MODIFIED
+                    or LAST_MODIFIED[filename] != mtime
+                ):
+
+                    with open(filepath, "r", encoding="utf-8") as f:
+                        DATA_CACHE[filename] = f.read()
+
+                    LAST_MODIFIED[filename] = mtime
+
+                    print(f"Loaded: {filename}")
+
+                combined_data += "\n\n" + DATA_CACHE.get(filename, "")
 
     except Exception as e:
         print("LOAD ERROR:", e)
 
-    return DATA_CACHE
+    return combined_data
 
 # ==========================================
 # CLEAN TEXT
 # ==========================================
 def clean_text(text):
+
     text = text.lower()
+
     text = re.sub(r'[^a-z0-9\s]', ' ', text)
+
     return text
 
 # ==========================================
 # SIMILARITY
 # ==========================================
 def similarity(a, b):
+
     return SequenceMatcher(None, a, b).ratio()
 
 # ==========================================
 # SMART SEARCH
 # ==========================================
 def search_answer(question):
-    DATA = load_data()
+
+    DATA = load_all_data()
 
     if not DATA:
         return ""
 
     question_clean = clean_text(question)
 
-    # Split using blank lines
+    # Split sections using blank lines
     sections = re.split(r'\n\s*\n', DATA)
 
     scored = []
@@ -78,34 +110,68 @@ def search_answer(question):
         q_words = question_clean.split()
         s_words = section_clean.split()
 
-        # Flexible keyword matching
+        # ==================================
+        # KEYWORD MATCHING
+        # ==================================
         for qw in q_words:
+
             for sw in s_words:
 
+                # Exact match
                 if qw == sw:
                     score += 5
 
+                # Partial match
                 elif qw in sw or sw in qw:
                     score += 2
 
-        # Similarity score
+        # ==================================
+        # SIMILARITY SCORE
+        # ==================================
         sim = similarity(question_clean, section_clean)
+
         score += sim * 10
 
-        # Bonus for programme names
-        if "acca" in question_clean and "acca" in section_clean:
-            score += 15
+        # ==================================
+        # IMPORTANT KEYWORD BONUS
+        # ==================================
+        keywords = [
+            "acca",
+            "registry",
+            "diploma",
+            "certificate",
+            "english",
+            "hotel",
+            "software",
+            "business",
+            "culinary",
+            "visa",
+            "loan"
+        ]
 
+        for keyword in keywords:
+
+            if keyword in question_clean and keyword in section_clean:
+                score += 10
+
+        # ==================================
+        # SAVE GOOD RESULTS
+        # ==================================
         if score > 2:
             scored.append((score, section))
 
-    # Sort highest score first
+    # ======================================
+    # SORT BEST RESULTS
+    # ======================================
     scored.sort(reverse=True, key=lambda x: x[0])
 
-    # Get top sections
+    # ======================================
+    # GET TOP MATCHES
+    # ======================================
     top_sections = []
 
     for score, section in scored[:8]:
+
         top_sections.append(section)
 
     return "\n\n".join(top_sections)
@@ -162,7 +228,9 @@ QUESTION:
         return answer
 
     except Exception as e:
+
         print("GROQ ERROR:", e)
+
         return "Server error. Please try again later."
 
 # ==========================================
@@ -170,6 +238,7 @@ QUESTION:
 # ==========================================
 @app.route("/")
 def home():
+
     return "Smart AI College Chatbot Running"
 
 # ==========================================
@@ -177,8 +246,10 @@ def home():
 # ==========================================
 @app.route("/health")
 def health():
+
     return jsonify({
-        "status": "ok"
+        "status": "ok",
+        "files_loaded": list(DATA_CACHE.keys())
     })
 
 # ==========================================
@@ -192,6 +263,7 @@ def chat():
         data = request.get_json()
 
         if not data:
+
             return jsonify({
                 "reply": "Please send a message.",
                 "status": "error"
@@ -200,15 +272,20 @@ def chat():
         question = data.get("message", "").strip()
 
         if not question:
+
             return jsonify({
                 "reply": "Please enter a question.",
                 "status": "error"
             })
 
-        # Step 1: Search data
+        # ==================================
+        # STEP 1: SEARCH CONTEXT
+        # ==================================
         context = search_answer(question)
 
-        # Step 2: Generate AI answer
+        # ==================================
+        # STEP 2: AI RESPONSE
+        # ==================================
         answer = generate_ai_response(question, context)
 
         return jsonify({
@@ -217,6 +294,7 @@ def chat():
         })
 
     except Exception as e:
+
         print("CHAT ERROR:", e)
 
         return jsonify({
@@ -228,6 +306,13 @@ def chat():
 # RUN SERVER
 # ==========================================
 if __name__ == "__main__":
+
+    print("===================================")
+    print("SMART AI COLLEGE CHATBOT STARTED")
+    print("===================================")
+
+    # Preload files
+    load_all_data()
 
     app.run(
         host="0.0.0.0",
