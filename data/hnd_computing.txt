@@ -1,0 +1,94 @@
+HIGHER NATIONAL DIPLOMA (HND) IN COMPUTING
+
+SECTION A: PROGRAMME INFORMATION
+--------------------------------
+Programme Course: Higher National Diploma in Computing
+Programme Code: 603/7596/6
+
+Programme Summary:
+A 2-year UK-based qualification designed to equip students with industry-relevant computing skills. The programme covers programming, networking, database design, software development, and security, preparing graduates for careers in the IT industry.
+
+Awarding Body: Pearson BTEC (UK)
+Duration: 2 Years
+Mode of Study: Full-time
+Intake Months: January, May, September
+
+Entry Requirements:
+- SPM / O-Level: Minimum 3 credits (including Mathematics)
+- UEC: Minimum 3 Bs
+- OR equivalent qualification (STPM, Foundation, Diploma)
+- International students: IELTS 5.5 or equivalent
+
+SECTION B: PROGRAMME STRUCTURE
+--------------------------------
+Total Credit Hours: 240 credits
+
+Main Subjects Overview:
+- Programming
+- Networking
+- Database Design & Development
+- Software Development Lifecycle
+- Cybersecurity
+- Project Management
+
+Level 4 Units:
+- Unit 01 – Programming
+- Unit 02 – Networking
+- Unit 03 – Professional Practice
+- Unit 04 – Database Design and Development
+- Unit 05 – Security
+- Unit 06 – Planning a Computing Project
+- Unit 07 – Software Development Lifecycle
+- Unit 14 – Maths for Computing
+
+Level 5 Units:
+- Unit 08 – Maths for Computing (Advanced)
+- Unit 13 – Computing Research Project
+- Unit 14 – Business Process Support
+- Unit 18 – Discrete Mathematics
+- Unit 21 – Application Programming Interfaces
+- Unit 26 – Big Data Analytics and Visualisation
+- Unit 29 – Network Security
+- Unit 32 – Information Security Management
+
+SECTION C: STUDY MODE & ASSESSMENT
+--------------------------------
+Overall Study Mode:
+- 100% assignment-based assessment
+
+Assessment Components:
+- Assignment reports
+- Presentations
+- System development / project files
+- Viva sessions
+- Turnitin & plagiarism reports (≤15%)
+
+Grading System:
+- Pass (P)
+- Merit (M)
+- Distinction (D)
+
+SECTION D: CAREER & PROGRESSION
+--------------------------------
+Career Pathways:
+- Software Developer
+- Web Developer
+- Business Analyst
+- Game Developer
+- System Analyst / Designer
+- IT Support Specialist
+
+Degree Progression:
+- Direct entry into final year Bachelor’s Degree in UK universities such as:
+  - University of Central Lancashire
+  - Middlesex University
+  - University of Bedfordshire
+  - University of Gloucestershire
+
+SECTION E: ADDITIONAL INFORMATION
+--------------------------------
+Brochure Link: https://tinyurl.com/mvpwbsj5
+Application Link: (Not specified)
+Lecturer In Charge:
+- Ms. Nur Anissya Binti Setia Budi
+- Ms. Nur Syahiera Binti Othman
