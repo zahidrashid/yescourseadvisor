@@ -37,29 +37,45 @@ def load_all_data():
         if not os.path.exists(DATA_FOLDER):
             os.makedirs(DATA_FOLDER)
 
-        # Read all txt files
-        for filename in os.listdir(DATA_FOLDER):
+        # Read ALL txt files from data and subfolders
+        for root, dirs, files in os.walk(DATA_FOLDER):
 
-            if filename.endswith(".txt"):
+            for filename in files:
 
-                filepath = os.path.join(DATA_FOLDER, filename)
+                if filename.lower().endswith(".txt"):
 
-                mtime = os.path.getmtime(filepath)
+                    filepath = os.path.join(root, filename)
 
-                # Reload only if modified
-                if (
-                    filename not in LAST_MODIFIED
-                    or LAST_MODIFIED[filename] != mtime
-                ):
+                    # Unique key including folder path
+                    relative_path = os.path.relpath(
+                        filepath,
+                        DATA_FOLDER
+                    )
 
-                    with open(filepath, "r", encoding="utf-8") as f:
-                        DATA_CACHE[filename] = f.read()
+                    mtime = os.path.getmtime(filepath)
 
-                    LAST_MODIFIED[filename] = mtime
+                    # Reload only if modified
+                    if (
+                        relative_path not in LAST_MODIFIED
+                        or LAST_MODIFIED[relative_path] != mtime
+                    ):
 
-                    print(f"Loaded: {filename}")
+                        with open(
+                            filepath,
+                            "r",
+                            encoding="utf-8"
+                        ) as f:
 
-                combined_data += "\n\n" + DATA_CACHE.get(filename, "")
+                            DATA_CACHE[relative_path] = f.read()
+
+                        LAST_MODIFIED[relative_path] = mtime
+
+                        print(f"Loaded: {relative_path}")
+
+                    combined_data += (
+                        "\n\n"
+                        + DATA_CACHE.get(relative_path, "")
+                    )
 
     except Exception as e:
         print("LOAD ERROR:", e)
