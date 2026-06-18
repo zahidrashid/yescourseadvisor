@@ -1,0 +1,12 @@
+﻿GRADING POLICY FOR FINAL EXAMINATION
+    1. Purpose This grading policy establishes a fair, transparent, and consistent system for evaluating student performance in final examinations. It converts percentage marks into letter grades and grade points to facilitate academic progression, GPA calculation, and recognition of achievement.
+    2. Scope This policy applies to all final examinations across all subjects and programs unless a specific course has an approved variation (subject to departmental approval).
+    3. Grade Point Average (GPA) and Cumulative Grade Point Average (CGPA) Calculation
+Each subject is assigned credit hours based on its workload. GPA (for a single semester) and CGPA (across all semesters) are calculated as: GPA/CGPA = (Σ (Grade Points × Credit Hours)) ÷ (Total Credit Hours Attempted) Results are rounded to two decimal places. Failed subjects (F) contribute 0.00 grade points but are included in total credit hours attempted.
+    1. Additional Policies
+    • Rounding of Marks: Individual subject percentage marks are rounded to the nearest whole number before applying the scale (e.g., 79.5% → 80%, earning A-).
+    • Grace Marks: Up to 2 grace marks may be awarded in exceptional cases (e.g., to reach the passing threshold or next grade boundary), subject to departmental committee approval.
+    • Re-evaluation/Rechecking: Students may apply for re-evaluation within 10 days of result declaration, subject to payment of prescribed fees.
+    • Academic Probation: Students with semester GPA below 1.50 may be placed on academic probation.
+    • Incomplete Grades: Temporary "I" (Incomplete) grades may be assigned for valid reasons; must be resolved within the next semester.
+

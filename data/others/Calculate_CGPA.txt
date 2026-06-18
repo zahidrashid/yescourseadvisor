@@ -1,0 +1,66 @@
+﻿How to Calculate CGPA Based on Subject Grades (Using the Provided Grading Scale)
+CGPA stands for Cumulative Grade Point Average. It is a measure of your overall academic performance across multiple subjects (or semesters). In the grading system you shared, each subject's final exam mark is converted to a letter grade and then to grade points (on a 4.0 scale). The CGPA is calculated by weighting these grade points by the credit hours of each subject.
+Step-by-Step Guide to Calculate CGPA
+    1. Determine the Grade Points for Each Subject
+Use the grading scale to convert your percentage mark to grade points.
+Marks Range	Letter Grade	Grade Points
+80–100	A	4.00
+75–79	A-	3.67
+70–74	B+	3.33
+65–69	B	3.00
+60–64	B-	2.67
+55–59	C+	2.33
+50–54	C	2.00
+47–49	C-	1.67
+44–46	D+	1.33
+40–43	D	1.00
+0–39	F	0.00
+       
+    2. Know the Credit Hours for Each Subject
+Every subject has a certain number of credits (also called credit hours or units). This reflects the workload or importance of the subject.
+        ◦ Common values: 3 credits (major subjects), 2 credits (labs or minor subjects), 1 credit (electives), etc.
+        ◦ If all subjects have the same credits (e.g., all 3 credits), the calculation becomes simpler.
+    3. Calculate Grade Points Earned for Each Subject
+Formula:
+Grade Points Earned = Grade Points × Credit Hours
+    4. Sum Up Total Grade Points Earned and Total Credit Hours
+        ◦ Total Grade Points Earned = Sum of (Grade Points × Credits) for all subjects
+        ◦ Total Credit Hours = Sum of credits for all subjects attempted
+    5. Calculate CGPA
+Final Formula:
+CGPA = Total Grade Points Earned ÷ Total Credit Hours
+(Usually rounded to 2 decimal places)
+Detailed Example
+Suppose you have taken 5 subjects in a semester:
+Subject	Marks (%)	Letter Grade	Grade Points	Credit Hours	Grade Points Earned (Grade Points × Credits)
+Mathematics	85	A	4.00	4	4.00 × 4 = 16.00
+Physics	72	B+	3.33	3	3.33 × 3 = 9.99
+Chemistry	68	B	3.00	3	3.00 × 3 = 9.00
+English	58	C+	2.33	2	2.33 × 2 = 4.66
+Computer Science	45	D+	1.33	3	1.33 × 3 = 3.99
+
+Step 1: Add up Total Grade Points Earned
+16.00 + 9.99 + 9.00 + 4.66 + 3.99 = 43.64
+Step 2: Add up Total Credit Hours
+4 + 3 + 3 + 2 + 3 = 15
+Step 3: CGPA = 43.64 ÷ 15 = 2.91 (approximately)
+Your semester GPA (or CGPA if this is your only semester) would be 2.91 out of 4.00.
+For Multiple Semesters (True Cumulative GPA)
+If you have results from more than one semester:
+    • Calculate the Total Grade Points Earned across all semesters.
+    • Calculate the Total Credit Hours across all semesters.
+    • Then apply the same formula: CGPA = Total Grade Points ÷ Total Credit Hours.
+Special Cases
+    • Failed Subject (F): Grade points = 0.00. You earn no points, but the credits are still counted in the total (this lowers your CGPA).
+    • Retaken Subject: Some universities replace the old grade, others average both — check your institution's policy.
+    • All Subjects Same Credits: If every subject is worth the same credits, you can simply average the grade points directly.
+Quick Tips
+    • Aim for higher marks in subjects with more credit hours — they impact your CGPA more.
+    • A CGPA of 3.50+ is often considered good/first division in many systems.
+    • Use a spreadsheet (Excel/Google Sheets) for easy calculation with many subjects.
+If you provide me with:
+    • Your subject names
+    • Marks (or letter grades)
+    • Credit hours for each subject
+    • (And semesters if multiple)
+
