@@ -1,0 +1,88 @@
+========================================
+PTPTN LOAN INFORMATION
+Diploma in Information Technology (DIT)
+========================================
+
+1. INSTITUTION & PROGRAM DETAILS
+----------------------------------------
+Institution        : Kolej Antarabangsa YES
+Programme          : Diploma in Information Technology (Full-Time)
+Study Level        : Diploma
+Duration           : 2.5 Years
+Bank Panel         : CIMB Bank Berhad
+IPT Code           : B10
+Programme Code     : 8424
+
+----------------------------------------
+2. LOAN AMOUNT STRUCTURE
+----------------------------------------
+Maximum Loan       : RM 8,000 / year
+75% Loan Amount    : RM 5,100 / year
+50% Loan Amount    : RM 3,400 / year
+
+----------------------------------------
+3. SEMESTER INTAKES
+----------------------------------------
+Semester 1         : January
+Semester 2         : May
+Semester 3         : September
+
+----------------------------------------
+4. LOAN APPLICATION SCHEDULE
+----------------------------------------
+Semester 1:
+  - Opening Period : December – January
+  - Closing Period : December – January
+
+Semester 2:
+  - Opening Period : April – May
+  - Closing Period : April – May
+
+Semester 3:
+  - Opening Period : August – September
+  - Closing Period : August – September
+
+----------------------------------------
+5. LOAN DISBURSEMENT PROCESS
+----------------------------------------
+Step 1 : PTPTN sends student data to institution
+Step 2 : Institution verifies student status
+Step 3 : PTPTN processes payment
+Step 4 : Funds credited to student account
+
+----------------------------------------
+6. LOAN ELIGIBILITY CRITERIA
+----------------------------------------
+Eligibility is based on:
+  • Family income level
+  • STR (Sumbangan Tunai Rahmah) status
+
+Categories:
+  1. 75% Loan
+     - Family income ≤ RM 8,000
+     - OR STR recipient
+
+  2. 50% Loan
+     - Family income > RM 8,000
+
+----------------------------------------
+7. IMPORTANT CONDITIONS
+----------------------------------------
+  • Loan released after agreement submission
+  • Must maintain CGPA ≥ 2.0
+  • Must continue in approved programme
+  • Must NOT receive other sponsorship
+
+----------------------------------------
+8. PAYMENT INFORMATION
+----------------------------------------
+  • Payment is credited directly to student account
+  • PTPTN does NOT deduct tuition fees
+  • Students must pay fees to college separately
+
+----------------------------------------
+9. CONTACT INFORMATION
+----------------------------------------
+PTPTN Careline : 03-2193 3000
+Website        : www.ptptn.gov.my
+Address        : Menara PTPTN, Kuala Lumpur

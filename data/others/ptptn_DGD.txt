@@ -1,0 +1,174 @@
+================================================================================
+                     PTPTN LOAN DISBURSEMENT SCHEDULE
+           Perbadanan Tabung Pendidikan Tinggi Nasional (PTPTN)
+                  National Higher Education Fund Corporation
+================================================================================
+
+  Careline        : 03 - 2193 3000
+  Portal Rasmi    : www.ptptn.gov.my
+  Aduan Online    : eaduan.ptptn.gov.my
+  Alamat          : Tingkat Bawah, Menara PTPTN, Blok D, Megan Avenue II,
+                    No. 12, Jalan Yap Kwan Seng, 50450 Kuala Lumpur.
+
+
+--------------------------------------------------------------------------------
+BAHAGIAN 1: MAKLUMAT IPT DAN PROGRAM
+(SECTION 1: INSTITUTION AND PROGRAM INFORMATION)
+--------------------------------------------------------------------------------
+
+  Nama IPT              : KOLEJ ANTARABANGSA YES
+  Nama Program          : SEPENUH MASA - DIPLOMA IN GRAPHIC DESIGN
+  Peringkat Pengajian   : DIPLOMA SEPENUH MASA
+  Bank Panel            : CIMB BANK BERHAD (CIMB)
+  Kod IPT               : B10
+  Kod Program           : B6194
+  Tempoh Pengajian      : 2 2/3 TAHUN
+
+  Kadar Maksimum        : RM8,000.00
+  Kadar (75%)           : RM5,100.00
+  Kadar (50%)           : RM3,400.00
+
+  Semester 1            : 01/01
+  Semester 2            : 01/05
+  Semester 3            : 01/09
+
+  Tarikh Akhir Akreditasi   : 01/07/2097
+  Tarikh Akhir Program      : 28/03/2030
+  Tarikh Akhir Premis       : 01/04/2028
+
+
+--------------------------------------------------------------------------------
+BAHAGIAN 2: TARIKH MULA PERMOHONAN PINJAMAN
+(SECTION 2: LOAN APPLICATION START DATES)
+--------------------------------------------------------------------------------
+
+  Semester        Kelompok 1      Kelompok 2
+  ----------      ----------      ----------
+  Semester 1      01/12           01/01
+  Semester 2      01/04           01/05
+  Semester 3      01/08           01/09
+
+
+--------------------------------------------------------------------------------
+BAHAGIAN 3: TARIKH TUTUP PERMOHONAN PINJAMAN
+(SECTION 3: LOAN APPLICATION CLOSING DATES)
+--------------------------------------------------------------------------------
+
+  Semester        Kelompok 1      Kelompok 2
+  ----------      ----------      ----------
+  Semester 1      31/12           31/01
+  Semester 2      30/04           31/05
+  Semester 3      31/08           30/09
+
+
+--------------------------------------------------------------------------------
+BAHAGIAN 4: MAKLUMAT BAYARAN PINJAMAN (PEMINJAM SEDIA ADA)
+(SECTION 4: LOAN DISBURSEMENT INFORMATION - EXISTING BORROWERS)
+--------------------------------------------------------------------------------
+
+  [ SEMESTER 1 ]
+
+  Proses                                              Kelompok 1  Kelompok 2
+  --------------------------------------------------  ----------  ----------
+  PTPTN hantar data ke IPT                            01/01       17/01
+  PTPTN terima status pengajian pelajar daripada IPT  14/01       28/01
+  PTPTN Proses Bayaran                                16/01       30/01
+  Kredit ke Akaun Peminjam                            24/01       07/02
+
+
+  [ SEMESTER 2 ]
+
+  Proses                                              Kelompok 1  Kelompok 2
+  --------------------------------------------------  ----------  ----------
+  PTPTN hantar data ke IPT                            01/05       17/05
+  PTPTN terima status pengajian pelajar daripada IPT  14/05       28/05
+  PTPTN Proses Bayaran                                16/05       30/05
+  Kredit ke Akaun Peminjam                            24/05       07/06
+
+
+  [ SEMESTER 3 ]
+
+  Proses                                              Kelompok 1  Kelompok 2
+  --------------------------------------------------  ----------  ----------
+  PTPTN hantar data ke IPT                            01/09       17/09
+  PTPTN terima status pengajian pelajar daripada IPT  14/09       28/09
+  PTPTN Proses Bayaran                                16/09       30/09
+  Kredit ke Akaun Peminjam                            24/09       07/10
+
+
+--------------------------------------------------------------------------------
+BAHAGIAN 5: NOTA
+(SECTION 5: NOTES)
+--------------------------------------------------------------------------------
+
+  A. PROGRAM SEPENUH MASA (FULL-TIME PROGRAM)
+  --------------------------------------------
+
+  * Peringkat jumlah pinjaman ditentukan berdasarkan kelayakan di bawah:
+
+  Bil.  Jumlah Pinjaman             Kelayakan
+  ----  ----------------------      -------------------------------------------------
+  1.    Maksimum                    Sekiranya pelajar atau penjaga pelajar
+                                    disenaraikan sebagai penerima Sumbangan
+                                    Tunai Rahmah (STR)
+
+  2.    75% daripada pinjaman       Pendapatan keluarga tidak melebihi RM8,000.00
+        maksimum                    (tiada dalam data STR)
+
+  3.    50% daripada pinjaman       Pendapatan keluarga melebihi RM8,000.00
+        maksimum                    (tiada dalam data STR)
+
+  * Jumlah pinjaman maksimum program Diploma Sepenuh Masa akan dinaikkan daripada
+    RM6,800.00 kepada RM8,000.00 setahun kepada IPTS yang bersetuju menyediakan
+    simpanan bertakaful kepada pelajar B40 Diploma Sepenuh Masa.
+
+  * Jumlah Pinjaman 75% dan 50% adalah kekal dengan jumlah pinjaman sedia ada
+    iaitu 75% dan 50% daripada RM6,800.00 setahun.
+
+
+  B. PROGRAM SEPARUH MASA (PART-TIME PROGRAM)
+  --------------------------------------------
+
+  i.  Jumlah pinjaman pendidikan sebenar ditentukan mengikut yuran pengajian
+      sahaja dan tidak melebihi jumlah siling yang ditetapkan.
+
+  ii. Pinjaman untuk Separuh Masa IPTS disediakan bagi institusi berikut sahaja:
+        - Universiti Terbuka Malaysia
+        - Universiti Terbuka Wawasan
+        - Universiti Tun Abdul Razak (UniRazak)
+        - Asia E Universiti
+        - UNITAR
+
+
+  C. PENGELUARAN PINJAMAN (LOAN DISBURSEMENT)
+  --------------------------------------------
+
+  i.  Pengeluaran pinjaman pertama dibuat setelah pelajar memulangkan dokumen
+      perjanjian lengkap kepada PTPTN.
+
+  ii. Pengeluaran pinjaman kepada pelajar bagi semester berikutnya dibuat
+      berdasarkan syarat-syarat berikut:
+
+        1. Masih meneruskan pengajian pada peringkat, jurusan dan IPT yang
+           diluluskan;
+
+        2. Lulus peperiksaan pada semester sebelumnya dengan keputusan Purata
+           Nilai Gred (PNG) 2.0 ke atas; dan
+
+        3. Tidak menerima tajaan lain.
+
+  iii. PTPTN tidak terlibat di dalam urusan pemotongan yuran pengajian IPT.
+       Amaun pinjaman akan dikreditkan terus ke akaun pelajar mengikut semester
+       tertakluk kepada pengesahan yang diberikan oleh IPT.
+
+       Semakan bayaran pinjaman boleh dilakukan melalui:
+         - Penyata pinjaman
+         - Penyata akaun bank peminjam
+
+       Sebarang pertanyaan melibatkan pemotongan yuran pengajian perlu dirujuk
+       kepada IPT masing-masing.
+
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================

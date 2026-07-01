@@ -1,0 +1,163 @@
+================================================================================
+                     PTPTN LOAN DISBURSEMENT SCHEDULE
+           Perbadanan Tabung Pendidikan Tinggi Nasional (PTPTN)
+                  National Higher Education Fund Corporation
+================================================================================
+
+
+--------------------------------------------------------------------------------
+SECTION 1: INSTITUTION AND PROGRAM INFORMATION
+--------------------------------------------------------------------------------
+
+  Institution Name      : YES INTERNATIONAL COLLEGE
+  Program Name          : FULL TIME - DIPLOMA IN BUSINESS MANAGEMENT
+  Level of Study        : FULL TIME DIPLOMA
+  Panel Bank            : CIMB BANK BERHAD (CIMB)
+  Institution Code      : B10
+  Program Code          : B6195
+  Duration of Study     : 2 2/3 YEARS
+
+  Maximum Rate          : RM8,000.00
+  Rate (75%)            : RM5,100.00
+  Rate (50%)            : RM3,400.00
+
+  Semester 1            : 01/01
+  Semester 2            : 01/05
+  Semester 3            : 01/09
+
+  Final Accreditation Date  : 01/07/2097
+  Final Program Date        : 24/06/2024
+  Final Premises Date       : 01/04/2028
+
+
+--------------------------------------------------------------------------------
+SECTION 2: LOAN APPLICATION START DATES
+--------------------------------------------------------------------------------
+
+  Semester        Group 1         Group 2
+  ----------      -------         -------
+  Semester 1      01/12           01/01
+  Semester 2      01/04           01/05
+  Semester 3      01/08           01/09
+
+
+--------------------------------------------------------------------------------
+SECTION 3: LOAN APPLICATION CLOSING DATES
+--------------------------------------------------------------------------------
+
+  Semester        Group 1         Group 2
+  ----------      -------         -------
+  Semester 1      31/12           31/01
+  Semester 2      30/04           31/05
+  Semester 3      31/08           30/09
+
+
+--------------------------------------------------------------------------------
+SECTION 4: LOAN DISBURSEMENT INFORMATION (EXISTING BORROWERS)
+--------------------------------------------------------------------------------
+
+  [ SEMESTER 1 ]
+
+  Process                                             Group 1     Group 2
+  --------------------------------------------------  -------     -------
+  PTPTN sends data to Institution                     01/01       17/01
+  PTPTN receives student study status from Institution 14/01      28/01
+  PTPTN processes payment                             16/01       30/01
+  Credit to Borrower's Account                        24/01       07/02
+
+
+  [ SEMESTER 2 ]
+
+  Process                                             Group 1     Group 2
+  --------------------------------------------------  -------     -------
+  PTPTN sends data to Institution                     01/05       17/05
+  PTPTN receives student study status from Institution 14/05      28/05
+  PTPTN processes payment                             16/05       30/05
+  Credit to Borrower's Account                        24/05       07/06
+
+
+  [ SEMESTER 3 ]
+
+  Process                                             Group 1     Group 2
+  --------------------------------------------------  -------     -------
+  PTPTN sends data to Institution                     01/09       17/09
+  PTPTN receives student study status from Institution 14/09      28/09
+  PTPTN processes payment                             16/09       30/09
+  Credit to Borrower's Account                        24/09       07/10
+
+
+--------------------------------------------------------------------------------
+SECTION 5: NOTES
+--------------------------------------------------------------------------------
+
+  A. FULL-TIME PROGRAM
+  ---------------------
+
+  * Loan amount level is determined based on the following eligibility:
+
+  No.   Loan Amount             Eligibility
+  ---   -----------             -----------
+  1.    Maximum                 Student or student's guardian is listed as a
+                                recipient of Sumbangan Tunai Rahmah (STR)
+
+  2.    75% of maximum loan     Family income not exceeding RM8,000.00
+                                (not in STR data)
+
+  3.    50% of maximum loan     Family income exceeding RM8,000.00
+                                (not in STR data)
+
+  * The maximum loan amount for the Full-Time Diploma program has been increased
+    from RM6,800.00 to RM8,000.00 per year for private institutions (IPTS) that
+    agree to provide takaful savings for B40 Full-Time Diploma students.
+
+  * The 75% and 50% loan amounts remain at existing amounts, which are 75% and
+    50% of RM6,800.00 per year.
+
+
+  B. PART-TIME PROGRAM
+  ---------------------
+
+  i.  The actual education loan amount is determined based solely on the tuition
+      fees and does not exceed the specified ceiling amount.
+
+  ii. Part-time loans for private institutions (IPTS) are provided only for:
+        - Universiti Terbuka Malaysia
+        - Universiti Terbuka Wawasan
+        - Universiti Tun Abdul Razak (UniRazak)
+        - Asia e University
+        - UNITAR
+
+
+  C. LOAN DISBURSEMENT
+  ---------------------
+
+  i.  The first loan disbursement is made after the student returns the complete
+      agreement documents to PTPTN.
+
+  ii. Loan disbursements for subsequent semesters are made based on the
+      following conditions:
+
+        1. Still continuing studies at the approved level, major, and
+           institution;
+
+        2. Passed the examination in the previous semester with a Grade Point
+           Average (PNG) of 2.0 and above; and
+
+        3. Not receiving any other sponsorship.
+
+  iii. PTPTN is NOT involved in the deduction of institution tuition fees.
+       The loan amount will be credited directly to the student's account
+       according to the semester, subject to confirmation provided by the
+       institution.
+
+       Loan payment checks can be made via:
+         - Loan statement
+         - Borrower's bank account statement
+
+       Any inquiries involving tuition fee deductions should be referred to
+       the respective institution.
+
+
+================================================================================
+                              END OF DOCUMENT
+================================================================================
