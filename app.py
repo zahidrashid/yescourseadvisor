@@ -1,276 +1,381 @@
 from flask import Flask, request, jsonify
 from flask_cors import CORS
+
 import os
-import re
-from difflib import SequenceMatcher
+import time
+import faiss
+import numpy as np
+
 from groq import Groq
+from sentence_transformers import SentenceTransformer
 
 app = Flask(__name__)
 CORS(app)
 
 # ==========================================
-# GROQ SETUP
+# CONFIGURATION
 # ==========================================
+
+DATA_FOLDER = "data"
+
+EMBEDDING_MODEL = "all-MiniLM-L6-v2"
+
+CHUNK_SIZE = 700
+CHUNK_OVERLAP = 150
+
+TOP_K = 8
+
+GROQ_MODEL = "llama-3.1-8b-instant"
+
+DEBUG = True
+
+# ==========================================
+# GROQ CLIENT
+# ==========================================
+
 client = Groq(
     api_key=os.environ.get("GROQ_API_KEY")
 )
 
 # ==========================================
-# MULTIPLE FILE CACHE SYSTEM
+# EMBEDDING MODEL
 # ==========================================
-DATA_CACHE = {}
-LAST_MODIFIED = {}
 
-# Folder containing txt files
-DATA_FOLDER = "data"
-
-def load_all_data():
-
-    global DATA_CACHE
-    global LAST_MODIFIED
-
-    combined_data = ""
-
-    try:
-
-        # Create folder automatically
-        if not os.path.exists(DATA_FOLDER):
-            os.makedirs(DATA_FOLDER)
-
-        # Read ALL txt files from data and subfolders
-        for root, dirs, files in os.walk(DATA_FOLDER):
-
-            for filename in files:
-
-                if filename.lower().endswith(".txt"):
-
-                    filepath = os.path.join(root, filename)
-
-                    # Unique key including folder path
-                    relative_path = os.path.relpath(
-                        filepath,
-                        DATA_FOLDER
-                    )
-
-                    mtime = os.path.getmtime(filepath)
-
-                    # Reload only if modified
-                    if (
-                        relative_path not in LAST_MODIFIED
-                        or LAST_MODIFIED[relative_path] != mtime
-                    ):
-
-                        with open(
-                            filepath,
-                            "r",
-                            encoding="utf-8"
-                        ) as f:
-
-                            DATA_CACHE[relative_path] = f.read()
-
-                        LAST_MODIFIED[relative_path] = mtime
-
-                        print(f"Loaded: {relative_path}")
-
-                    combined_data += (
-                        "\n\n"
-                        + DATA_CACHE.get(relative_path, "")
-                    )
-
-    except Exception as e:
-        print("LOAD ERROR:", e)
-
-    return combined_data
+embedding_model = SentenceTransformer(
+    EMBEDDING_MODEL
+)
 
 # ==========================================
-# CLEAN TEXT
+# GLOBAL STORAGE
 # ==========================================
-def clean_text(text):
 
-    text = text.lower()
+documents = []
 
-    text = re.sub(r'[^a-z0-9\s]', ' ', text)
+document_sources = []
 
-    return text
+index = None
+
+file_times = {}
+
+last_index_time = 0
+
+def load_files():
+
+    docs = []
+    sources = []
+
+    if not os.path.exists(DATA_FOLDER):
+        os.makedirs(DATA_FOLDER)
+
+    for root, dirs, files in os.walk(DATA_FOLDER):
+
+        for file in files:
+
+            if not file.lower().endswith(".txt"):
+                continue
+
+            path = os.path.join(root, file)
+
+            try:
+
+                with open(path, "r", encoding="utf-8") as f:
+                    text = f.read().strip()
+
+                if len(text) < 10:
+                    continue
+
+                docs.append(text)
+                sources.append(path)
+
+                if DEBUG:
+                    print("Loaded:", path)
+
+            except Exception as e:
+                print("Cannot read:", path)
+                print(e)
+
+    return docs, sources
+
 
 # ==========================================
-# SIMILARITY
+# SPLIT TEXT INTO CHUNKS
 # ==========================================
-def similarity(a, b):
 
-    return SequenceMatcher(None, a, b).ratio()
+def split_text(text):
+
+    chunks = []
+
+    start = 0
+
+    while start < len(text):
+
+        end = start + CHUNK_SIZE
+
+        chunk = text[start:end].strip()
+
+        if chunk:
+            chunks.append(chunk)
+
+        start += CHUNK_SIZE - CHUNK_OVERLAP
+
+    return chunks
+
 
 # ==========================================
-# SMART SEARCH
+# CHECK IF FILES CHANGED
 # ==========================================
+
+def files_changed():
+
+    global file_times
+
+    changed = False
+
+    current = {}
+
+    for root, dirs, files in os.walk(DATA_FOLDER):
+
+        for file in files:
+
+            if file.lower().endswith(".txt"):
+
+                path = os.path.join(root, file)
+
+                mtime = os.path.getmtime(path)
+
+                current[path] = mtime
+
+                if path not in file_times:
+                    changed = True
+
+                elif file_times[path] != mtime:
+                    changed = True
+
+    if len(current) != len(file_times):
+        changed = True
+
+    file_times = current
+
+    return changed
+
+
+# ==========================================
+# BUILD VECTOR INDEX
+# ==========================================
+
+def build_index():
+
+
+
+    global documents
+    global document_sources
+    global index
+    global last_index_time
+
+    print("\nBuilding vector index...")
+
+    documents = []
+    document_sources = []
+
+    files, sources = load_files()
+
+    for text, source in zip(files, sources):
+
+        chunks = split_text(text)
+
+        for chunk in chunks:
+
+            documents.append(chunk)
+            document_sources.append(source)
+
+    if len(documents) == 0:
+
+        print("No documents found.")
+        return
+
+    embeddings = embedding_model.encode(
+        documents,
+        convert_to_numpy=True,
+        normalize_embeddings=True,
+        show_progress_bar=True
+    )
+
+    dimension = embeddings.shape[1]
+
+    index = faiss.IndexFlatIP(dimension)
+
+    index.add(embeddings.astype("float32"))
+
+    last_index_time = time.time()
+
+    print("--------------------------------")
+    print("Files :", len(files))
+    print("Chunks:", len(documents))
+    print("Index Built Successfully")
+    print("--------------------------------")
+
+
+# ==========================================
+# SEMANTIC SEARCH
+# ==========================================
+
 def search_answer(question):
 
-    DATA = load_all_data()
+    global index
 
-    if not DATA:
-        return ""
+    if index is None:
+        build_index()
 
-    question_clean = clean_text(question)
+    if files_changed():
+        print("Files changed. Rebuilding index...")
+        build_index()
 
-    # Split sections using blank lines
-    sections = re.split(r'\n\s*\n', DATA)
+    query = embedding_model.encode(
+        [question],
+        convert_to_numpy=True,
+        normalize_embeddings=True
+    )
 
-    scored = []
+    distances, indices = index.search(
+        query.astype("float32"),
+        TOP_K
+    )
 
-    for section in sections:
+    context = []
+    used_sources = []
 
-        section_clean = clean_text(section)
+    SIMILARITY_THRESHOLD = 0.25
 
-        score = 0
+    for score, idx in zip(distances[0], indices[0]):
 
-        q_words = question_clean.split()
-        s_words = section_clean.split()
+        if idx == -1:
+            continue
 
-        # ==================================
-        # KEYWORD MATCHING
-        # ==================================
-        for qw in q_words:
+        if score < SIMILARITY_THRESHOLD:
+            continue
 
-            for sw in s_words:
+        context.append(documents[idx])
 
-                # Exact match
-                if qw == sw:
-                    score += 5
+        if document_sources[idx] not in used_sources:
+            used_sources.append(document_sources[idx])
 
-                # Partial match
-                elif qw in sw or sw in qw:
-                    score += 2
+    if DEBUG:
 
-        # ==================================
-        # SIMILARITY SCORE
-        # ==================================
-        sim = similarity(question_clean, section_clean)
+        print("\n==============================")
+        print("QUESTION:")
+        print(question)
+        print("==============================")
 
-        score += sim * 10
+        print("MATCHED FILES:")
 
-        # ==================================
-        # IMPORTANT KEYWORD BONUS
-        # ==================================
-        keywords = [
-            "acca",
-            "registry",
-            "diploma",
-            "certificate",
-            "english",
-            "hotel",
-            "software",
-            "business",
-            "culinary",
-            "visa",
-            "loan"
-        ]
+        for s in used_sources:
+            print(" -", s)
 
-        for keyword in keywords:
+        print("==============================")
 
-            if keyword in question_clean and keyword in section_clean:
-                score += 10
+    return "\n\n".join(context)
 
-        # ==================================
-        # SAVE GOOD RESULTS
-        # ==================================
-        if score > 2:
-            scored.append((score, section))
 
-    # ======================================
-    # SORT BEST RESULTS
-    # ======================================
-    scored.sort(reverse=True, key=lambda x: x[0])
-
-    # ======================================
-    # GET TOP MATCHES
-    # ======================================
-    top_sections = []
-
-    for score, section in scored[:8]:
-
-        top_sections.append(section)
-
-    return "\n\n".join(top_sections)
 
 # ==========================================
-# AI RESPONSE
+# GENERATE AI RESPONSE
 # ==========================================
+
+
 def generate_ai_response(question, context):
 
     if not context.strip():
         return "I don't have that information."
 
-    try:
+    prompt = f"""
+You are the official AI assistant of YES International College.
 
-        prompt = f"""
-You are a college chatbot assistant.
+STRICT RULES:
 
-IMPORTANT RULES:
-- Answer ONLY using the provided context.
-- Do NOT use outside knowledge.
-- Do NOT add extra information.
-- If information is missing, say:
-  "I don't have that information."
-- Keep answers short, clear, and human-like.
+1. Answer ONLY from the provided context.
 
-CONTEXT:
+2. Never make up information.
+
+3. If the answer is not found, reply exactly:
+
+I don't have that information.
+
+4. Be friendly.
+
+5. Use bullet points whenever suitable.
+
+6. Do not mention the word "context".
+
+-------------------------
+
 {context}
 
-QUESTION:
+-------------------------
+
+Question:
+
 {question}
+
+Answer:
 """
 
+    try:
+
         response = client.chat.completions.create(
-            model="llama-3.1-8b-instant",
+
+            model=GROQ_MODEL,
+
             temperature=0,
-            max_tokens=300,
+
+            max_tokens=500,
+
             messages=[
                 {
-                    "role": "system",
-                    "content": "You are a helpful college assistant."
+                    "role":"system",
+                    "content":"You are an official college assistant."
                 },
                 {
-                    "role": "user",
-                    "content": prompt
+                    "role":"user",
+                    "content":prompt
                 }
             ]
         )
 
-        answer = response.choices[0].message.content.strip()
-
-        if not answer:
-            return "I don't have that information."
-
-        return answer
+        return response.choices[0].message.content.strip()
 
     except Exception as e:
 
-        print("GROQ ERROR:", e)
+        print(e)
 
-        return "Server error. Please try again later."
+        return "Server error."
 
 # ==========================================
 # HOME
 # ==========================================
+
 @app.route("/")
 def home():
+    return "YES International College AI Chatbot Running"
 
-    return "Smart AI College Chatbot Running"
 
 # ==========================================
-# HEALTH CHECK
+# HEALTH
 # ==========================================
+
 @app.route("/health")
 def health():
 
     return jsonify({
         "status": "ok",
-        "files_loaded": list(DATA_CACHE.keys())
+        "documents": len(documents),
+        "files": len(file_times)
     })
+
 
 # ==========================================
 # CHAT API
 # ==========================================
+
 @app.route("/chat", methods=["POST"])
 def chat():
 
@@ -279,34 +384,31 @@ def chat():
         data = request.get_json()
 
         if not data:
-
             return jsonify({
-                "reply": "Please send a message.",
-                "status": "error"
+                "status": "error",
+                "reply": "Please send a message."
             })
 
         question = data.get("message", "").strip()
 
-        if not question:
-
+        if question == "":
             return jsonify({
-                "reply": "Please enter a question.",
-                "status": "error"
+                "status": "error",
+                "reply": "Please enter a question."
             })
 
-        # ==================================
-        # STEP 1: SEARCH CONTEXT
-        # ==================================
         context = search_answer(question)
 
-        # ==================================
-        # STEP 2: AI RESPONSE
-        # ==================================
+        if DEBUG:
+            print("\n========== CONTEXT ==========")
+            print(context)
+            print("=============================\n")
+
         answer = generate_ai_response(question, context)
 
         return jsonify({
-            "reply": answer,
-            "status": "success"
+            "status": "success",
+            "reply": answer
         })
 
     except Exception as e:
@@ -314,21 +416,22 @@ def chat():
         print("CHAT ERROR:", e)
 
         return jsonify({
-            "reply": "Server error.",
-            "status": "error"
+            "status": "error",
+            "reply": "Server Error."
         })
 
+
 # ==========================================
-# RUN SERVER
+# START SERVER
 # ==========================================
+
 if __name__ == "__main__":
 
-    print("===================================")
-    print("SMART AI COLLEGE CHATBOT STARTED")
-    print("===================================")
+    print("=" * 60)
+    print("YES AI CHATBOT STARTING...")
+    print("=" * 60)
 
-    # Preload files
-    load_all_data()
+    build_index()
 
     app.run(
         host="0.0.0.0",
