@@ -3,14 +3,13 @@ GENERAL ENGLISH PROGRAMME
 SECTION A: PROGRAMME INFORMATION
 --------------------------------
 Programme Course: General English
-Programme Code: (Not specified)
 Programme Summary:
 The General English Program is a flexible course designed to improve overall English communication skills at various proficiency levels. The program ranges from 1 month up to 12 months and focuses on speaking, listening, reading, writing, grammar, and vocabulary. Learners are placed according to their level and progress at their own pace. It is suitable for beginners to advanced learners for daily communication, academic preparation, and professional use.
 
-Awarding Body: YES International College
+Awarding Body: COLLA/YES International College
 Duration: 1 Month – 12 Months
 Mode of Study: Full-time
-Intake Months: Every Month
+Intake: Every Month
 
 Entry Requirements:
 - No formal requirements
@@ -18,7 +17,6 @@ Entry Requirements:
 
 SECTION B: PROGRAMME STRUCTURE
 --------------------------------
-Total Credit Hours: Nil
 
 Main Subjects Overview:
 - Speaking & Pronunciation – Build fluency and confidence in communication
@@ -30,23 +28,7 @@ Main Subjects Overview:
 - Functional English – Real-life communication (travel, work, social)
 - Phonetics – Understanding speech sounds and pronunciation systems (IPA)
 
-Course Classification:
-1. Compulsory
-2. Discipline Core
-3. Common Core
-
-Year 1 Subjects: Not Applicable
-Year 2 Subjects: Not Applicable
-Year 3 Subjects: Not Applicable
-
-Industrial Training: Not Applicable
-
-SECTION C: STUDY MODE
---------------------------------
-Overall Study Mode:
-- Coursework only
-
-SECTION D: CAREER & PROGRESSION
+SECTION C: CAREER & PROGRESSION
 --------------------------------
 Career Pathways:
 - Further Education & Training
@@ -74,7 +56,7 @@ Special Features:
 - Small to medium class sizes
 - Continuous assessment and progress tracking
 
-SECTION E: ADDITIONAL INFORMATION
+SECTION D: ADDITIONAL INFORMATION
 --------------------------------
 Brochure Link: (Not provided)
 Application Link: (Not provided)
