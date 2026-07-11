@@ -58,8 +58,8 @@ Special Features:
 
 SECTION D: ADDITIONAL INFORMATION
 --------------------------------
-Brochure Link: (Not provided)
-Application Link: (Not provided)
+Brochure Link: https://yes.edu.my/brochure/GE.pdf
+Application Link: https://student.yes.edu.my/enquiry
 Lecturer In Charge: Muhammad Syazwan & Ms Irsalina
 
 
@@ -77,5 +77,3 @@ TUITION FEES (SUMMARY)
 2. 4 Weeks: RM2800
 3. 6 Weeks: RM3000
 4. 8 Weeks: RM3500
-
-
