@@ -580,60 +580,49 @@ def chat():
         data = request.get_json()
 
         if not data:
-
             return jsonify({
-
                 "status": "error",
-
                 "reply": "Please send a JSON request."
-
             })
 
         question = data.get("message", "").strip()
 
-
-        # ==================================
-# DIRECT BROCHURE RESPONSE
-# ==================================
-
-brochure = get_brochure(question)
-
-if brochure:
-
-    return jsonify({
-        "status": "success",
-        "reply": f"📄 You can view the programme brochure here:\n\n{brochure}"
-    })
-
-    
-
         if question == "":
-
             return jsonify({
-
                 "status": "error",
-
                 "reply": "Please enter your question."
-
             })
 
-        print("=" * 70)
-        print("QUESTION:", question)
+        # ==================================
+        # DIRECT BROCHURE RESPONSE
+        # ==================================
+        brochure = get_brochure(question)
 
-        
+        if brochure:
+            return jsonify({
+                "status": "success",
+                "reply": f"📄 You can view the programme brochure here:\n\n{brochure}"
+            })
+
+        # ==================================
+        # NORMAL AI RESPONSE
+        # ==================================
+        context = search_answer(question)
+        answer = generate_ai_response(question, context)
+
+        return jsonify({
+            "status": "success",
+            "reply": answer
+        })
 
     except Exception as e:
 
         print("CHAT ERROR:", e)
 
         return jsonify({
-
             "status": "error",
-
             "reply": "Sorry, something went wrong."
-
         })
-
 
 # ==========================================
 # RELOAD DATA
