@@ -531,3 +531,178 @@ QUESTION
             "Sorry, I couldn't process your request.\n"
             "Please try again later."
         )
+# ==========================================
+# HOME
+# ==========================================
+@app.route("/")
+def home():
+
+    load_all_data()
+
+    return jsonify({
+        "status": "running",
+        "message": "YES International College AI Chatbot",
+        "loaded_files": len(DATA_CACHE)
+    })
+
+
+# ==========================================
+# HEALTH CHECK
+# ==========================================
+@app.route("/health")
+def health():
+
+    load_all_data()
+
+    return jsonify({
+
+        "status": "ok",
+
+        "files_loaded": list(DATA_CACHE.keys()),
+
+        "total_files": len(DATA_CACHE),
+
+        "brochures": len(BROCHURES)
+
+    })
+
+
+# ==========================================
+# CHAT API
+# ==========================================
+@app.route("/chat", methods=["POST"])
+def chat():
+
+    try:
+
+        load_all_data()
+
+        data = request.get_json()
+
+        if not data:
+
+            return jsonify({
+
+                "status": "error",
+
+                "reply": "Please send a JSON request."
+
+            })
+
+        question = data.get("message", "").strip()
+
+        if question == "":
+
+            return jsonify({
+
+                "status": "error",
+
+                "reply": "Please enter your question."
+
+            })
+
+        print("=" * 70)
+        print("QUESTION:", question)
+
+        # =====================================
+        # SEARCH KNOWLEDGE
+        # =====================================
+
+        context = search_answer(question)
+
+        # Optional debug
+        # print(context)
+
+        # =====================================
+        # AI RESPONSE
+        # =====================================
+
+        answer = generate_ai_response(question, context)
+
+        print("ANSWER GENERATED")
+
+        return jsonify({
+
+            "status": "success",
+
+            "reply": answer
+
+        })
+
+    except Exception as e:
+
+        print("CHAT ERROR:", e)
+
+        return jsonify({
+
+            "status": "error",
+
+            "reply": "Sorry, something went wrong."
+
+        })
+
+
+# ==========================================
+# RELOAD DATA
+# ==========================================
+@app.route("/reload")
+def reload_data():
+
+    global DATA_CACHE
+    global LAST_MODIFIED
+    global COMBINED_DATA
+
+    DATA_CACHE = {}
+    LAST_MODIFIED = {}
+    COMBINED_DATA = ""
+
+    load_all_data()
+
+    return jsonify({
+
+        "status": "success",
+
+        "message": "Knowledge base reloaded.",
+
+        "files": list(DATA_CACHE.keys())
+
+    })
+
+
+# ==========================================
+# LIST COURSES
+# ==========================================
+@app.route("/courses")
+def courses():
+
+    return jsonify({
+
+        "total_courses": len(BROCHURES),
+
+        "courses": sorted(BROCHURES.keys())
+
+    })
+
+
+# ==========================================
+# START SERVER
+# ==========================================
+if __name__ == "__main__":
+
+    print("=" * 70)
+    print("YES INTERNATIONAL COLLEGE AI CHATBOT")
+    print("=" * 70)
+
+    load_all_data()
+
+    print("Knowledge Files Loaded:", len(DATA_CACHE))
+
+    app.run(
+
+        host="0.0.0.0",
+
+        port=int(os.environ.get("PORT", 10000)),
+
+        debug=True
+
+    )
