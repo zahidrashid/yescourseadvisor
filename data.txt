@@ -1,143 +1,34 @@
 College Overview: YES International College is located at Level UG, Block C, Megan Avenue 2, Jalan Yap Kwan Seng, Kuala Lumpur. 
 Campus Facilities / location: Classes are held at Level LG, Level 8, Level 11, and Level 18. COLLA Department and Culinary Program Facilities are located in Block B.
 
-Programme:
-Association of Chartered Certified Accountants (ACCA)
-
-Keywords:
-ACCA, accounting, finance, audit, taxation, business, financial management, auditor, accountant
-
-Programme Code:
-MQA/FA8401
-
-Programme Summary:
-The Association of Chartered Certified Accountants (ACCA) is a professional qualification in accounting and finance that prepares students for careers in auditing, taxation, financial management, accounting, and business strategy.
-
-Awarding Body:
-Association of Chartered Certified Accountants
-
-Duration:
-3 Years / 6 Semesters
-
-Mode of Study:
-Online, Full-time, Part-time
-
-Intake Months:
-January
-July
-
-Entry Requirements:
-SPM with 3 credits including English and Mathematics
-OR equivalent qualifications
-
-Main Subjects Overview:
-Accounting
-Finance
-Audit
-Taxation
-Law
-Management
-Strategy
-Ethics
-
-Year 1 Subjects:
-
-Semester 1:
-FBT - Business and Technology
-FMA - Management Accounting
-FFA - Financial Accounting
-MPU3113 - Tamadun Asia dan Tamadun Islam
-
-Semester 2:
-LW (F4) - Corporate Business and Law
-PM (F5) - Performance Management
-MPU3123 - Hubungan Etnik
-
-Year 2 Subjects:
-
-Semester 3:
-TX (F6) - Taxation
-FR (F7) - Financial Reporting
-MPU3123 - Thinking Skills
-
-Semester 4:
-AA (F8) - Audit and Assurance
-FM (F9) - Financial Management
-MPU3223 - Bahasa Kebangsaan A
-
-Year 3 Subjects:
-
-Semester 5:
-SBR - Strategic Business Reporting
-SBL - Strategic Business Leader
-
-Semester 6:
-AFM - Advanced Financial Management
-AAA - Advanced Audit and Assurance
-ATX - Advanced Taxation
-APM - Advanced Performance Management
-MPU3313 - Introduction to Comparative Religion
-
-Assessment Method:
-Coursework and Final Examination
-
-Career Pathways:
-Financial Accountant
-Auditor
-Tax Consultant
-Management Accountant
-Finance Manager
-Chief Financial Officer (CFO)
-
-Degree Progression:
-Further study in Degree in Computer Science or other fields in computing
-
-Brochure Link:
-https://tinyurl.com/2x5haevp
-
-Application Link:
-Please contact the college administration for application details.
-
-Lecturers In Charge for ACCA:
-Mr. Veerapan Pariakuruppan
-Mr. Ganes Moorthy
-Mr. Liew Hong Jin
-Mr. Md Kamrul Hasan Khan
-
-Detailed Subject Structure:
-
-Year 1 Semester 1:
-FBT | Business and Technology | 4 Credit Hours
-FMA | Management Accounting | 4 Credit Hours
-FFA | Financial Accounting | 4 Credit Hours
-MPU3113 | Tamadun Asia dan Tamadun Islam | 3 Credit Hours
-
-Year 1 Semester 2:
-LW(F4) | Corporate Business and Law | 4 Credit Hours
-PM(F5) | Performance Management | 4 Credit Hours
-MPU3123 | Hubungan Etnik | 3 Credit Hours
-
-Year 2 Semester 3:
-TX(F6) | Taxation | 4 Credit Hours
-FR(F7) | Financial Reporting | 4 Credit Hours
-MPU3123 | Thinking Skills | 3 Credit Hours
-
-Year 2 Semester 4:
-AA(F8) | Audit and Assurance | 4 Credit Hours
-FM(F9) | Financial Management | 4 Credit Hours
-MPU3223 | Bahasa Kebangsaan A | 3 Credit Hours
-
-Year 3 Semester 5:
-SBR | Strategic Business Reporting | 4 Credit Hours
-SBL | Strategic Business Leader | 4 Credit Hours
-
-Year 3 Semester 6:
-AFM | Advanced Financial Management | 4 Credit Hours
-AAA | Advanced Audit and Assurance | 4 Credit Hours
-ATX | Advanced Taxation | 4 Credit Hours
-APM | Advanced Performance Management | 4 Credit Hours
-MPU3313 | Introduction to Comparative Religion | 3 Credit Hours
-
-
 YES International College Registry Department Overview
 The Registry Department at YES International College is responsible for managing student administrative services, from admission to graduation. It is headed by Ms Norhanim Mohsin and provides essential support to both local and international students. The department ensures smooth academic progression by handling records, loans, visas, and other student-related processes. Below is a structured summary of the key information extracted from the provided registry document, organized for clarity.
+
+
+YES International College Brochures
+https://yes.edu.my/brochure/
+acca-brochure.pdf
+amjb-handbook.pdf
+bachelor-business-administration-brochure.pdf
+bachelor-software-engineering-brochure.pdf
+bachelor-visual-communication--brochure.pdf
+certificate-business-studies-brochure.pdf
+certificate-food-beverage-brochure.pdf
+certificate-hotel-operation-brochure.pdf
+certificate-intensive-english-brochure.pdf
+certificate-software-engineering-brochure.pdf
+diploma-business-management-brochure.pdf
+diploma-business-management-odl-brochure.pdf
+diploma-computer-science-brochure.pdf
+diploma-graphic-design-brochure.pdf
+diploma-in-early-childhood-brochure.pdf
+diploma-in-property-management-brochure.pdf
+diploma-in-psychology-brochure.pdf
+diploma-information-systems-brocure.pdf
+diploma-logistic-supply-management-brochure.pdf
+hnd-business-brochure.pdf
+hnd-computing-brochure.pdf
+hnd-graphic-design-brochure.pdf
+hnd-interior-design-brochure.pdf
+hnd-procurement-supply-brochure.pdf
+teeside-university-brochure.pdf
