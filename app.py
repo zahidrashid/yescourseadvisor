@@ -16,230 +16,510 @@ client = Groq(
 )
 
 # ==========================================
-# MULTIPLE FILE CACHE SYSTEM
+# DATA CACHE
 # ==========================================
-DATA_CACHE = {}
-LAST_MODIFIED = {}
-
-# Folder containing txt files
 DATA_FOLDER = "data"
 
+DATA_CACHE = {}
+LAST_MODIFIED = {}
+COMBINED_DATA = ""
+
+# ==========================================
+# BROCHURE URL
+# ==========================================
+BROCHURE_BASE = "https://yes.edu.my/brochure/"
+
+# ==========================================
+# COURSE BROCHURES
+# ==========================================
+BROCHURES = {
+
+    # ACCA
+    "acca": "acca-brochure.pdf",
+    "association of chartered certified accountants": "acca-brochure.pdf",
+
+    # Certificate
+    "certificate business studies":
+        "certificate-business-studies-brochure.pdf",
+
+    "certificate food beverage":
+        "certificate-food-beverage-brochure.pdf",
+
+    "certificate food and beverage":
+        "certificate-food-beverage-brochure.pdf",
+
+    "certificate hotel operation":
+        "certificate-hotel-operation-brochure.pdf",
+
+    "certificate intensive english":
+        "certificate-intensive-english-brochure.pdf",
+
+    "certificate software engineering":
+        "certificate-software-engineering-brochure.pdf",
+
+    # Diploma
+
+    "diploma business management":
+        "diploma-business-management-brochure.pdf",
+
+    "diploma business management odl":
+        "diploma-business-management-odl-brochure.pdf",
+
+    "diploma computer science":
+        "diploma-computer-science-brochure.pdf",
+
+    "diploma graphic design":
+        "diploma-graphic-design-brochure.pdf",
+
+    "diploma early childhood":
+        "diploma-in-early-childhood-brochure.pdf",
+
+    "diploma property management":
+        "diploma-in-property-management-brochure.pdf",
+
+    "diploma psychology":
+        "diploma-in-psychology-brochure.pdf",
+
+    "diploma information systems":
+        "diploma-information-systems-brocure.pdf",
+
+    "diploma logistic supply management":
+        "diploma-logistic-supply-management-brochure.pdf",
+
+    # Bachelor
+
+    "bachelor business administration":
+        "bachelor-business-administration-brochure.pdf",
+
+    "business administration":
+        "bachelor-business-administration-brochure.pdf",
+
+    "bachelor software engineering":
+        "bachelor-software-engineering-brochure.pdf",
+
+    "software engineering":
+        "bachelor-software-engineering-brochure.pdf",
+
+    "bachelor visual communication":
+        "bachelor-visual-communication--brochure.pdf",
+
+    "visual communication":
+        "bachelor-visual-communication--brochure.pdf",
+
+    # HND
+
+    "hnd business":
+        "hnd-business-brochure.pdf",
+
+    "hnd computing":
+        "hnd-computing-brochure.pdf",
+
+    "hnd graphic design":
+        "hnd-graphic-design-brochure.pdf",
+
+    "hnd interior design":
+        "hnd-interior-design-brochure.pdf",
+
+    "hnd procurement supply":
+        "hnd-procurement-supply-brochure.pdf",
+
+    # Others
+
+    "teesside":
+        "teeside-university-brochure.pdf",
+
+    "teeside":
+        "teeside-university-brochure.pdf",
+
+    "amjb":
+        "amjb-handbook.pdf"
+}
+
+# ==========================================
+# COURSE SYNONYMS
+# ==========================================
+SYNONYMS = {
+
+    "cs":
+        "computer science",
+
+    "it":
+        "information systems",
+
+    "english":
+        "intensive english",
+
+    "graphic":
+        "graphic design",
+
+    "hotel":
+        "hotel operation",
+
+    "business":
+        "business management",
+
+    "software":
+        "software engineering",
+
+    "acca course":
+        "acca",
+
+    "degree":
+        "bachelor",
+
+    "foundation":
+        "certificate"
+}
+
+# ==========================================
+# LOAD TXT FILES
+# ==========================================
 def load_all_data():
 
     global DATA_CACHE
     global LAST_MODIFIED
+    global COMBINED_DATA
 
-    combined_data = ""
+    updated = False
 
-    try:
+    if not os.path.exists(DATA_FOLDER):
+        os.makedirs(DATA_FOLDER)
 
-        # Create folder automatically
-        if not os.path.exists(DATA_FOLDER):
-            os.makedirs(DATA_FOLDER)
+    for root, dirs, files in os.walk(DATA_FOLDER):
 
-        # Read ALL txt files from data and subfolders
-        for root, dirs, files in os.walk(DATA_FOLDER):
+        for file in files:
 
-            for filename in files:
+            if not file.endswith(".txt"):
+                continue
 
-                if filename.lower().endswith(".txt"):
+            filepath = os.path.join(root, file)
 
-                    filepath = os.path.join(root, filename)
+            relative = os.path.relpath(filepath, DATA_FOLDER)
 
-                    # Unique key including folder path
-                    relative_path = os.path.relpath(
-                        filepath,
-                        DATA_FOLDER
-                    )
+            modified = os.path.getmtime(filepath)
 
-                    mtime = os.path.getmtime(filepath)
+            if (
+                relative not in LAST_MODIFIED
+                or LAST_MODIFIED[relative] != modified
+            ):
 
-                    # Reload only if modified
-                    if (
-                        relative_path not in LAST_MODIFIED
-                        or LAST_MODIFIED[relative_path] != mtime
-                    ):
+                with open(
+                    filepath,
+                    "r",
+                    encoding="utf-8"
+                ) as f:
 
-                        with open(
-                            filepath,
-                            "r",
-                            encoding="utf-8"
-                        ) as f:
+                    DATA_CACHE[relative] = f.read()
 
-                            DATA_CACHE[relative_path] = f.read()
+                LAST_MODIFIED[relative] = modified
 
-                        LAST_MODIFIED[relative_path] = mtime
+                updated = True
 
-                        print(f"Loaded: {relative_path}")
+                print("Loaded:", relative)
 
-                    combined_data += (
-                        "\n\n"
-                        + DATA_CACHE.get(relative_path, "")
-                    )
+    if updated or not COMBINED_DATA:
 
-    except Exception as e:
-        print("LOAD ERROR:", e)
+        COMBINED_DATA = "\n\n".join(DATA_CACHE.values())
 
-    return combined_data
-
-# ==========================================
+    return COMBINED_DATA
+    # ==========================================
 # CLEAN TEXT
 # ==========================================
+
+CLEAN_REGEX = re.compile(r'[^a-z0-9\s]')
+
 def clean_text(text):
 
     text = text.lower()
 
-    text = re.sub(r'[^a-z0-9\s]', ' ', text)
+    text = CLEAN_REGEX.sub(" ", text)
 
-    return text
+    text = re.sub(r"\s+", " ", text)
+
+    return text.strip()
+
 
 # ==========================================
-# SIMILARITY
+# EXPAND QUESTION USING SYNONYMS
 # ==========================================
+
+def expand_question(question):
+
+    question = clean_text(question)
+
+    for key, value in SYNONYMS.items():
+
+        question = question.replace(key, value)
+
+    return question
+
+
+# ==========================================
+# STRING SIMILARITY
+# ==========================================
+
 def similarity(a, b):
 
     return SequenceMatcher(None, a, b).ratio()
 
+
 # ==========================================
-# SMART SEARCH
+# FIND BROCHURE
 # ==========================================
+
+def get_brochure(question):
+
+    q = expand_question(question)
+
+    for course, pdf in BROCHURES.items():
+
+        if course in q:
+
+            return BROCHURE_BASE + pdf
+
+    return None
+
+
+# ==========================================
+# SEARCH ANSWER
+# ==========================================
+
 def search_answer(question):
 
-    DATA = load_all_data()
+    data = load_all_data()
 
-    if not DATA:
+    if not data:
+
         return ""
 
-    question_clean = clean_text(question)
+    question_clean = expand_question(question)
 
-    # Split sections using blank lines
-    sections = re.split(r'\n\s*\n', DATA)
+    sections = re.split(r"\n\s*\n", data)
 
     scored = []
 
+    keywords = [
+        "acca",
+        "registry",
+        "certificate",
+        "diploma",
+        "bachelor",
+        "degree",
+        "hnd",
+        "business",
+        "software",
+        "computer",
+        "science",
+        "graphic",
+        "hotel",
+        "english",
+        "culinary",
+        "psychology",
+        "property",
+        "logistic",
+        "information",
+        "visa",
+        "loan",
+        "admission",
+        "fees",
+        "entry",
+        "duration",
+        "semester",
+        "intake"
+    ]
+
+    q_words = set(question_clean.split())
+
     for section in sections:
+
+        if not section.strip():
+            continue
 
         section_clean = clean_text(section)
 
+        s_words = set(section_clean.split())
+
         score = 0
 
-        q_words = question_clean.split()
-        s_words = section_clean.split()
+        # =====================================
+        # EXACT WORD MATCH
+        # =====================================
 
-        # ==================================
-        # KEYWORD MATCHING
-        # ==================================
+        common = q_words.intersection(s_words)
+
+        score += len(common) * 6
+
+        # =====================================
+        # PARTIAL WORD MATCH
+        # =====================================
+
         for qw in q_words:
 
             for sw in s_words:
 
-                # Exact match
-                if qw == sw:
-                    score += 5
+                if qw != sw and (qw in sw or sw in qw):
 
-                # Partial match
-                elif qw in sw or sw in qw:
                     score += 2
 
-        # ==================================
-        # SIMILARITY SCORE
-        # ==================================
-        sim = similarity(question_clean, section_clean)
-
-        score += sim * 10
-
-        # ==================================
+        # =====================================
         # IMPORTANT KEYWORD BONUS
-        # ==================================
-        keywords = [
-            "acca",
-            "registry",
-            "diploma",
-            "certificate",
-            "english",
-            "hotel",
-            "software",
-            "business",
-            "culinary",
-            "visa",
-            "loan"
-        ]
+        # =====================================
 
         for keyword in keywords:
 
             if keyword in question_clean and keyword in section_clean:
+
                 score += 10
 
-        # ==================================
-        # SAVE GOOD RESULTS
-        # ==================================
-        if score > 2:
+        # =====================================
+        # STRING SIMILARITY BONUS
+        # =====================================
+
+        score += similarity(question_clean, section_clean) * 12
+
+        if score > 5:
+
             scored.append((score, section))
 
-    # ======================================
-    # SORT BEST RESULTS
-    # ======================================
     scored.sort(reverse=True, key=lambda x: x[0])
 
-    # ======================================
-    # GET TOP MATCHES
-    # ======================================
-    top_sections = []
+    context = ""
 
-    for score, section in scored[:8]:
+    for score, section in scored:
 
-        top_sections.append(section)
+        if len(context) > 2200:
+            break
 
-    return "\n\n".join(top_sections)
+        context += section.strip()
+        context += "\n\n"
+
+    return context.strip()
+
+
+# ==========================================
+# DEBUG SEARCH (OPTIONAL)
+# ==========================================
+
+def debug_search(question):
+
+    data = load_all_data()
+
+    sections = re.split(r"\n\s*\n", data)
+
+    print("=" * 70)
+    print("QUESTION:", question)
+    print("=" * 70)
+
+    for section in sections[:5]:
+
+        print(section[:200])
+        print("-" * 50)
 
 # ==========================================
 # AI RESPONSE
 # ==========================================
+
 def generate_ai_response(question, context):
 
     if not context.strip():
-        return "I don't have that information."
+        return (
+            "I don't have that information.\n\n"
+            "For more information, please visit:\n"
+            "https://yes.edu.my/brochure/"
+        )
+
+    brochure = get_brochure(question)
 
     try:
 
         prompt = f"""
-You are a college chatbot assistant.
+You are the OFFICIAL YES International College AI Assistant.
 
-IMPORTANT RULES:
-- Answer ONLY using the provided context.
-- Do NOT use outside knowledge.
-- Do NOT add extra information.
-- If information is missing, say:
-  "I don't have that information."
-- Keep answers short, clear, and human-like.
+IMPORTANT RULES
 
-CONTEXT:
+1. Answer ONLY from the CONTEXT below.
+
+2. Never use outside knowledge.
+
+3. Never guess.
+
+4. Never invent fees, duration, entry requirements,
+or programme details.
+
+5. If the answer is not found in the context, reply exactly:
+
+I don't have that information.
+
+6. Keep answers friendly.
+
+7. Keep answers under 150 words.
+
+8. If the question is about a course or programme,
+summarize the programme clearly.
+
+9. Use bullet points whenever appropriate.
+
+CONTEXT
+
 {context}
 
-QUESTION:
+QUESTION
+
 {question}
 """
 
         response = client.chat.completions.create(
+
             model="llama-3.1-8b-instant",
+
             temperature=0,
-            max_tokens=300,
+
+            max_tokens=350,
+
             messages=[
+
                 {
                     "role": "system",
-                    "content": "You are a helpful college assistant."
+                    "content":
+                    "You are the official YES International College assistant."
                 },
+
                 {
                     "role": "user",
                     "content": prompt
                 }
+
             ]
+
         )
 
         answer = response.choices[0].message.content.strip()
 
         if not answer:
-            return "I don't have that information."
+
+            answer = "I don't have that information."
+
+        # ==========================================
+        # ADD BROCHURE
+        # ==========================================
+
+        if brochure:
+
+            answer += (
+                "\n\n"
+                "📄 Programme Brochure\n"
+                f"{brochure}"
+            )
+
+        # ==========================================
+        # WEBSITE LINK
+        # ==========================================
+
+        answer += (
+            "\n\n"
+            "🌐 YES International College\n"
+            "https://yes.edu.my/"
+        )
 
         return answer
 
@@ -247,91 +527,7 @@ QUESTION:
 
         print("GROQ ERROR:", e)
 
-        return "Server error. Please try again later."
-
-# ==========================================
-# HOME
-# ==========================================
-@app.route("/")
-def home():
-
-    return "Smart AI College Chatbot Running"
-
-# ==========================================
-# HEALTH CHECK
-# ==========================================
-@app.route("/health")
-def health():
-
-    return jsonify({
-        "status": "ok",
-        "files_loaded": list(DATA_CACHE.keys())
-    })
-
-# ==========================================
-# CHAT API
-# ==========================================
-@app.route("/chat", methods=["POST"])
-def chat():
-
-    try:
-
-        data = request.get_json()
-
-        if not data:
-
-            return jsonify({
-                "reply": "Please send a message.",
-                "status": "error"
-            })
-
-        question = data.get("message", "").strip()
-
-        if not question:
-
-            return jsonify({
-                "reply": "Please enter a question.",
-                "status": "error"
-            })
-
-        # ==================================
-        # STEP 1: SEARCH CONTEXT
-        # ==================================
-        context = search_answer(question)
-
-        # ==================================
-        # STEP 2: AI RESPONSE
-        # ==================================
-        answer = generate_ai_response(question, context)
-
-        return jsonify({
-            "reply": answer,
-            "status": "success"
-        })
-
-    except Exception as e:
-
-        print("CHAT ERROR:", e)
-
-        return jsonify({
-            "reply": "Server error.",
-            "status": "error"
-        })
-
-# ==========================================
-# RUN SERVER
-# ==========================================
-if __name__ == "__main__":
-
-    print("===================================")
-    print("SMART AI COLLEGE CHATBOT STARTED")
-    print("===================================")
-
-    # Preload files
-    load_all_data()
-
-    app.run(
-        host="0.0.0.0",
-        port=int(os.environ.get("PORT", 10000)),
-        debug=True
-    )
+        return (
+            "Sorry, I couldn't process your request.\n"
+            "Please try again later."
+        )
