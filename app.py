@@ -591,6 +591,22 @@ def chat():
 
         question = data.get("message", "").strip()
 
+
+        # ==================================
+# DIRECT BROCHURE RESPONSE
+# ==================================
+
+brochure = get_brochure(question)
+
+if brochure:
+
+    return jsonify({
+        "status": "success",
+        "reply": f"📄 You can view the programme brochure here:\n\n{brochure}"
+    })
+
+    
+
         if question == "":
 
             return jsonify({
@@ -604,30 +620,7 @@ def chat():
         print("=" * 70)
         print("QUESTION:", question)
 
-        # =====================================
-        # SEARCH KNOWLEDGE
-        # =====================================
-
-        context = search_answer(question)
-
-        # Optional debug
-        # print(context)
-
-        # =====================================
-        # AI RESPONSE
-        # =====================================
-
-        answer = generate_ai_response(question, context)
-
-        print("ANSWER GENERATED")
-
-        return jsonify({
-
-            "status": "success",
-
-            "reply": answer
-
-        })
+        
 
     except Exception as e:
 
